@@ -22,8 +22,8 @@ export default function Home() {
   // return null
   if(!data?.home) return <PageSkeleton/>
 
-  let content = data?.home.blockHeading2.content
-  console.log(content)
+  // let content = data?.home.blockHeading2.content
+  // console.log(content)
   return (
     <>
       <Header/>
