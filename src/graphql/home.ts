@@ -21,6 +21,104 @@ export const HOME_QUERY = gql`
             active
           }
         }
+        ... on ComponentCommonCountUpSection {
+          countUpSection {
+            afterCountText
+            beforeCountText
+            title
+            count
+          }
+        }
+        ... on ComponentCommonCta1 {
+          blockDescription {
+            content
+            heading
+            subHeading
+          }
+          bottomText1
+          bottomText2
+          image {
+            url
+          }
+        }
+        ... on ComponentCommonServicesSection {
+          blockHeading {
+            heading
+            content
+            subHeading
+          }
+          serviceLists {
+            active
+            heading
+            subHeading
+            lists {
+              link
+              text
+            }
+          }
+        }
+        ... on ComponentCommonProductsSection {
+          blockHeading {
+            heading
+            content
+            subHeading
+          }
+          proudctsLists {
+            blockHeading {
+              subHeading
+              heading
+              content
+            }
+            boldText
+            text
+            active
+            button {
+              name
+              active
+              link
+            }
+          }
+        }
+        ... on ComponentCommonNetworkComponent {
+          blockHeading {
+            content
+            heading
+            subHeading
+          }
+        }
+        ... on ComponentCommonDescriptionLists {
+          blockHeading {
+            subHeading
+            heading
+            content
+          }
+          layoutType
+          lists {
+            content
+            heading
+            svg
+            tags
+          }
+        }
+        ... on ComponentCommonFaq {
+          blockHeading {
+            subHeading
+            heading
+            content
+          }
+          qna {
+            answer
+            question
+          }
+        }
+        ... on ComponentCommonContactForm {
+          address
+          blockHeading {
+            heading
+            content
+            subHeading
+          }
+        }
       }
     }
   }

@@ -1,4 +1,14 @@
+import { NAVIGATION_QUERY } from '@/src/graphql/navigation';
+import { useQuery } from '@apollo/client/react';
+import { PageSkeleton } from '@/src/components/Skeletons';
+
 const Header = () => {
+  const { data, loading, error } = useQuery(NAVIGATION_QUERY);
+  if (loading) return <PageSkeleton />;
+  if (error) return <p>Error</p>;
+
+  if (!data?.navigation) return <PageSkeleton />;
+  console.log(data.navigation);
   return (
     <header>
       <div className="header-inner">
@@ -6,13 +16,22 @@ const Header = () => {
           ARVENTA<span>.</span>
         </a>
         <nav className="primary" id="primaryNav">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#products">Products</a>
-          <a href="#industries">Industries</a>
-          <a href="#cta" className="btn btn-fill">
-            Get a Quote
-          </a>
+          {data.navigation.navigation.map((item, index) => {
+            if (item.linkType == 'Normal') {
+              return (
+                <a key={index} href={item.link}>
+                  {item.text}
+                </a>
+              );
+            } else {
+              return (
+                <a key={index} href={item.link} className="btn btn-fill">
+                  {item.text}
+                </a>
+              );
+            }
+          })}
+
           <span className="nav-lang mono">
             <a href="#" className="active">
               EN

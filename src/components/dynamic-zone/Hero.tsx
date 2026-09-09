@@ -1,28 +1,41 @@
-const Hero = () => {
+import React from 'react';
+
+const Hero = (props) => {
   return (
     <section id="hero">
       <div className="glow glow-top" />
       <div className="glow glow-hero-spread" />
       <div className="wrap">
         <p className="route-tag" style={{ justifyContent: 'center' }}>
-          carrier services · cloud · contact center
+          {props.blockHeading.subHeading}
         </p>
         <h1>
-          The network behind the call.
-          <br />
-          The technology behind the sale.
+          <GetText text={props.blockHeading.heading} />
         </h1>
-        <p className="lead">Arventa Networks is a global carrier and communications provider powering call centers, BPOs, and enterprise contact centers with SIP trunking, cloud telephony, and dialer platforms built specifically for the job, backed by network coverage in 180+ countries.</p>
+        <p className="lead">{props.blockHeading.content}</p>
         <div className="hero-ctas">
-          <a href="#cta" className="btn btn-fill">
-            Talk to Sales
+          <a href={`${props.button1.link}`} className="btn btn-fill">
+            {props.button1.name}
           </a>
-          <a href="#products" className="btn btn-outline">
-            Explore Our Products
+          <a href={`${props.button2.link}`} className="btn btn-outline">
+            {props.button2.name}
           </a>
         </div>
       </div>
     </section>
   );
 };
-export default Hero
+export default Hero;
+
+const GetText = ({ text }) => {
+  return (
+    <>
+      {text.split('/').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ))}
+    </>
+  );
+};
