@@ -2,7 +2,10 @@ import { NAVIGATION_QUERY } from '@/src/graphql/navigation';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 import { appendBaseUrl } from '../helpers/common';
+import { useState } from 'react';
+
 const Header = () => {
+  const [open,setOpen] = useState(false)
   const { data, loading, error } = useQuery(NAVIGATION_QUERY);
   if (loading) return <PageSkeleton />;
   if (error) return <p>Error</p>;
@@ -15,7 +18,7 @@ const Header = () => {
         <a href="#hero" className="wordmark">
           <img src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img"/>
         </a>
-        <nav className="primary" id="primaryNav">
+        <nav className={`primary ${open ? 'open' : ''}`} id="primaryNav">
           {data.navigation.navigation.map((item, index) => {
             if (item.linkType == 'Normal') {
               return (
@@ -39,7 +42,7 @@ const Header = () => {
             |<a href="#">DE</a>
           </span>
         </nav>
-        <button className="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <button onClick={()=>{setOpen(!open)}} className="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
           <svg width={24} height={24} viewBox="0 0 24 24" fill="none">
             <path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
           </svg>
