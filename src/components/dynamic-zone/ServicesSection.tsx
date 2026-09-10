@@ -33,16 +33,20 @@ const ServicesSection = (props) => {
             } else {
               return (
                 <div key={index} className="card service-panel" style={{ borderColor: 'var(--accent)' }}>
-                  <h3>Contact Center &amp; Dialer</h3>
-                  <span className="service-tag">for call center operators</span>
+                  <h3>{item.heading}</h3>
+                  <span className="service-tag">{item.subHeading}</span>
                   <ul>
-                    <li>Contact Center Solutions</li>
-                    <li>
-                      <a href="#products">Tornado Dialer</a>
-                    </li>
-                    <li>
-                      <a href="#products">Call Con Dialer</a>
-                    </li>
+                    {item.lists.map((list, index) => {
+                      if (!list.link) {
+                        return <li key={index}>{list.text}</li>;
+                      } else {
+                        return (
+                          <li key={index}>
+                            <a href={list.link}>{list.text}</a>
+                          </li>
+                        );
+                      }
+                    })}
                   </ul>
                 </div>
               );
