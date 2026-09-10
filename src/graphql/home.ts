@@ -114,9 +114,44 @@ export const HOME_QUERY = gql`
         ... on ComponentCommonContactForm {
           address
           blockHeading {
+            subHeading
             heading
             content
-            subHeading
+          }
+          contact_form {
+            action
+            successText
+            failedText
+            name
+            formFields {
+              ... on ComponentFormTextField {
+                label
+                name
+                textFieldSize: size
+              }
+              ... on ComponentFormEmailField {
+                label
+                name
+                emailFieldSize: size
+              }
+              ... on ComponentFormDropdownField {
+                name
+                dropdownFieldSize: size
+                label
+                options {
+                  label
+                  value
+                }
+              }
+              ... on ComponentFormAddressField {
+                name
+                label
+                addressFieldSize:size
+              }
+              ... on ComponentFormFormButton {
+                label
+              }
+            }
           }
         }
       }

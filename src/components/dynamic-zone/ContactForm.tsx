@@ -1,24 +1,30 @@
-const ContactForm = () => {
+import StrapiRichText from "@/src/helpers/StrapiText";
+import Form from '@/src/components/Form'
+import { useState } from "react";
+const ContactForm = (props) => {
+  const [formSubmitted,setFormSubmitted] = useState(false)
+  const submitForm = (e) => {
+    console.log(e)
+    e.target.reset();
+    setFormSubmitted(true)
+  }
+  // console.log(props)
   return (
     <section id="cta">
       <div className="wrap grid-2">
         <div>
-          <p className="route-tag">let's talk</p>
-          <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>Tell us how your team dials, and we'll tell you what fits</h2>
+          <p className="route-tag">{props.blockHeading.subHeading}</p>
+          <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>{props.blockHeading.subHeading}</h2>
           <p className="lead" style={{ color: 'var(--text-muted)', marginBottom: 0 }}>
-            Whether you need carrier services, a dialer platform, or both, reach out and talk to someone who understands call center operations, not just a sales script.
+           {props.blockHeading.content}
           </p>
           <div className="contact-block">
-            <strong>Arventa Networks LLC</strong>
-            8051 N. Tamiami Trail, STE E6
-            <br />
-            Sarasota, Florida 34243
-            <br />
-            sales@arventanetworks.com
+            <StrapiRichText content={props.address}/>
           </div>
         </div>
-        <form className="quote-form card" id="quoteForm">
-          <div className="field">
+        <form onSubmit={(e)=>{ e.preventDefault(); submitForm(e)}} className="quote-form card" id="quoteForm">
+          <Form data={props.contact_form.formFields}/>
+          {/* <div className="field">
             <label htmlFor="f-name">Name</label>
             <input id="f-name" type="text" required />
           </div>
@@ -61,7 +67,10 @@ const ContactForm = () => {
             <button type="submit" className="btn btn-fill" style={{ width: '100%' }}>
               Get a Quote
             </button>
-          </div>
+          </div> */}
+          {formSubmitted && <div className="full">
+            <center><p className="route-tag">{props.contact_form.successText}</p></center>
+          </div>}
         </form>
       </div>
     </section>
