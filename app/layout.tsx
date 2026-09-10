@@ -14,8 +14,8 @@ import ApolloProvider from '@/src/http-client/ApolloProvider';
 // });
 
 export const metadata: Metadata = {
-  title: 'Arventa Networks',
-  description: 'Arventa Networks',
+  title: 'Arventa Networks 24/7',
+  description: 'Arventa Networks 24/7',
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
