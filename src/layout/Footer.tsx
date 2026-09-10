@@ -2,6 +2,8 @@ import { FOOTER_QUERY } from '@/src/graphql/footer';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 import StrapiRichText from '../helpers/StrapiText';
+import { appendBaseUrl } from '../helpers/common';
+
 const Footer = () => {
   const { data, loading, error } = useQuery(FOOTER_QUERY);
   if (loading) return <PageSkeleton />;
@@ -21,7 +23,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="#hero" className="wordmark">
-              ARVENTA<span>.</span>
+              <img src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img"/>
             </a>
             <p>{footerTop.address}</p>
           </div>

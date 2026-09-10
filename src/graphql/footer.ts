@@ -28,6 +28,9 @@ export const FOOTER_QUERY = gql`
       }
       footerTop {
         address
+        logo {
+          url
+        }
       }
     }
   }

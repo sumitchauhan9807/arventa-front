@@ -1,7 +1,7 @@
 import { NAVIGATION_QUERY } from '@/src/graphql/navigation';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
-
+import { appendBaseUrl } from '../helpers/common';
 const Header = () => {
   const { data, loading, error } = useQuery(NAVIGATION_QUERY);
   if (loading) return <PageSkeleton />;
@@ -13,7 +13,7 @@ const Header = () => {
     <header>
       <div className="header-inner">
         <a href="#hero" className="wordmark">
-          ARVENTA<span>.</span>
+          <img src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img"/>
         </a>
         <nav className="primary" id="primaryNav">
           {data.navigation.navigation.map((item, index) => {
