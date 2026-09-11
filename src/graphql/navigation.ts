@@ -11,6 +11,8 @@ export const NAVIGATION_QUERY = gql`
       logo {
         url
       }
+      height
+      width
     }
   }
 `;

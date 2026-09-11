@@ -28,6 +28,8 @@ export const FOOTER_QUERY = gql`
       }
       footerTop {
         address
+        height
+        width
         logo {
           url
         }
