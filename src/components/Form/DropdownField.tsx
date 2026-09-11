@@ -1,9 +1,11 @@
 const DropdownField = (props) => {
   // console.log(props);
+  const { name, label, dropdownFieldSize, register, errors } = props;
+
   return (
-    <div className={`field ${props.dropdownFieldSize == 'FULL' ? 'full' : ''}`}>
-      <label>{props.label}</label>
-      <select name={props.name}>
+    <div className={`field ${dropdownFieldSize == 'FULL' ? 'full' : ''}`}>
+      <label>{label}</label>
+      <select {...register(name)} name={name}>
         {props.options.map((option, index) => {
           return <option key={index} value={option.value}>{option.label}</option>;
         })}

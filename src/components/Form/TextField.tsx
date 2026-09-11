@@ -1,9 +1,11 @@
 const TextField = (props) => {
   // console.log(props)
+  const { name, label, textFieldSize, register, errors } = props;
   return (
-    <div className={`field ${props.textFieldSize == 'FULL' ? 'full' : ''}`}>
-      <label htmlFor="f-name">{props.label}</label>
-      <input name={props.name} type="text" required />
+    <div className={`field ${textFieldSize == 'FULL' ? 'full' : ''}`}>
+      <label htmlFor="f-name">{label}</label>
+      <input {...register(name)} name={name} type="text" />
+      {errors[name] && <p className="route-tag">{errors[name].message}</p>}
     </div>
   );
 };

@@ -1,13 +1,126 @@
-import StrapiRichText from "@/src/helpers/StrapiText";
-import Form from '@/src/components/Form'
-import { useState } from "react";
+import StrapiRichText from '@/src/helpers/StrapiText';
+import Form from '@/src/components/Form';
+import { useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import {axiosClient} from '@/src/http-client/axios';
+
+function createZodSchema(fields) {
+  const shape = {};
+
+  fields.forEach((field) => {
+    let schema;
+
+    switch (field.__typename) {
+      case 'ComponentFormTextField':
+        schema = z.string();
+
+        if (field.minLength) {
+          schema = schema.min(field.minLength, `${field.name} should be minimum of ${field.minLength} characters`);
+        }
+        // schema = schema.min(4, `Minimum 4 characters`);
+
+        if (field.maxLength) {
+          schema = schema.max(field.maxLength, `${field.name} should be maximum of ${field.maxLength} characters`);
+        }
+        // schema = schema.max(10, `Maximum 10 characters`);
+
+        break;
+      case 'ComponentFormEmailField':
+        schema = z.string().email('Please enter a valid email address');
+
+        break;
+      case 'ComponentFormAddressField':
+        schema = z.string();
+
+        if (field.minLength) {
+          schema = schema.min(field.minLength, `${field.name} should be minimum of ${field.minLength} characters`);
+        }
+        // schema = schema.min(4, `Minimum 4 characters`);
+
+        if (field.maxLength) {
+          schema = schema.max(field.maxLength, `${field.name} should be maximum of ${field.maxLength} characters`);
+        }
+        // schema = schema.max(10, `Maximum 10 characters`);
+
+        break;
+
+      default:
+        schema = z.string();
+    }
+
+    // Required / optional
+    if (!field.required) {
+      schema = schema.optional();
+    }
+
+    shape[field.name] = schema;
+  });
+
+  return z.object(shape);
+}
+
 const ContactForm = (props) => {
-  const [formSubmitted,setFormSubmitted] = useState(false)
-  const submitForm = (e) => {
-    console.log(e)
-    e.target.reset();
-    setFormSubmitted(true)
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [reCaptcha, setReCaptcha] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  function onChange(value) {
+    console.log('Captcha value:', value);
+    setReCaptcha(value);
   }
+  const dynamicSchema = createZodSchema(props.contact_form.formFields);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(dynamicSchema),
+  });
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    if (!reCaptcha) {
+      alert('Please complete the reCAPTCHA.');
+      return;
+    }
+    try {
+      setLoading(true)
+      const response = await axiosClient.post('/contact', {
+        areaOfIntrest:data.areaOfIntrest,
+        company:data.company,
+        email:data.email,
+        message:data.message,
+        mobile:data.mobile,
+        name:data.name,
+        phone:data.phone,
+        surname:data.surname,
+        captchaToken:reCaptcha,
+      });
+      setLoading(false)
+
+      // console.log('Success:', response.data);
+
+      // Optional: reset form
+      setFormSubmitted(true)
+      setReCaptcha('');
+      reset()
+    } catch (error) {
+      alert('something went wrong')
+      console.error('Contact form error:', error);
+      setLoading(false)
+      if (axios.isAxiosError(error)) {
+        console.error('Server response:', error.response?.data);
+      }
+    }
+  };
+
+  // console.log(errors);
+  // console.log(props.contact_form.formFields);
+
   // console.log(props)
   return (
     <section id="cta">
@@ -16,14 +129,29 @@ const ContactForm = (props) => {
           <p className="route-tag">{props.blockHeading.subHeading}</p>
           <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>{props.blockHeading.subHeading}</h2>
           <p className="lead" style={{ color: 'var(--text-muted)', marginBottom: 0 }}>
-           {props.blockHeading.content}
+            {props.blockHeading.content}
           </p>
           <div className="contact-block">
-            <StrapiRichText content={props.address}/>
+            <StrapiRichText content={props.address} />
           </div>
         </div>
-        <form onSubmit={(e)=>{ e.preventDefault(); submitForm(e)}} className="quote-form card" id="quoteForm">
-          <Form data={props.contact_form.formFields}/>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={(e) => {
+          //   e.preventDefault();
+          //   submitForm(e);
+          // }}
+          // className="quote-form card"
+          // id="quoteForm"
+        >
+          {/* <div>
+            <label>Name</label>
+
+            <input {...register('name')} />
+
+            {errors.name && <p>{errors.name.message}</p>}
+          </div> */}
+          <Form data={props.contact_form.formFields} register={register} errors={errors} />
           {/* <div className="field">
             <label htmlFor="f-name">Name</label>
             <input id="f-name" type="text" required />
@@ -68,13 +196,28 @@ const ContactForm = (props) => {
               Get a Quote
             </button>
           </div> */}
-          {formSubmitted && <div className="full">
-            <center><p className="route-tag">{props.contact_form.successText}</p></center>
-          </div>}
+          <ReCAPTCHA sitekey="6LeeRrUtAAAAAEsa9RbsRKg6gfXTmuL87SkQAJWQ" onChange={onChange} />
+          <div className="full submit-row">
+            <button disabled={loading} type="submit" id="quoteBtn" className="btn btn-fill" style={{ width: '100%', marginTop: '10px' }}>
+              {!loading && <span id="quoteBtnText">Get a Quote</span>}
+              {loading && (
+                <span id="quoteLoader">
+                  <span className="spinner"></span> Please wait...
+                </span>
+              )}
+            </button>
+          </div>
+          {formSubmitted && (
+            <div className="full">
+              <center>
+                <p style={{marginTop:"10px"}} className="route-tag">{props.contact_form.successText}</p>
+              </center>
+            </div>
+          )}
         </form>
       </div>
     </section>
   );
 };
 
-export default ContactForm
+export default ContactForm;

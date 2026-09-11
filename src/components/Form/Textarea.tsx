@@ -1,9 +1,12 @@
 const Textarea = (props) => {
+  const { name, label, addressFieldSize, register, errors } = props;
+
   return (
-    <div className={`field ${props.addressFieldSize == 'FULL' ? 'full' : ''}`}>
-      <label htmlFor="f-msg">{props.label}</label>
-      <textarea name={props.name} />
+    <div className={`field ${addressFieldSize == 'FULL' ? 'full' : ''}`}>
+      <label htmlFor="f-msg">{label}</label>
+      <textarea {...register(name)} name={name} />
+      {errors[name] && <p className="route-tag">{errors[name].message}</p>}
     </div>
   );
 };
-export default Textarea
+export default Textarea;

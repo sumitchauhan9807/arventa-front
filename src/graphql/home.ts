@@ -128,6 +128,8 @@ export const HOME_QUERY = gql`
                 label
                 name
                 textFieldSize: size
+                minLength
+                maxLength
               }
               ... on ComponentFormEmailField {
                 label
@@ -147,6 +149,8 @@ export const HOME_QUERY = gql`
                 name
                 label
                 addressFieldSize:size
+                minLength
+                maxLength
               }
               ... on ComponentFormFormButton {
                 label

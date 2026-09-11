@@ -1,1 +1,2 @@
-1. logo in header and footer
+6LeeRrUtAAAAAEsa9RbsRKg6gfXTmuL87SkQAJWQ -> sitekey
+6LeeRrUtAAAAAMNNMSXvfEI6ibdMD7Adgw0_1tai  --> secret key

@@ -6,20 +6,19 @@ const EmailField = lazy(() => import('./EmailField'));
 const Textarea = lazy(() => import('./Textarea'));
 const FormButton = lazy(() => import('./FormButton'));
 
-
 // ComponentCommonContactForm
 
 const componentMap = {
   ComponentFormTextField: TextField,
   ComponentFormDropdownField: DropdownField,
-  ComponentFormAddressField:Textarea,
-  ComponentFormEmailField:EmailField,
-  ComponentFormFormButton:FormButton
+  ComponentFormAddressField: Textarea,
+  ComponentFormEmailField: EmailField,
+  // ComponentFormFormButton:FormButton
 
   // add others here
 };
 
-const FormDynamicZone = ({ data }) => {
+const FormDynamicZone = ({ data, register, errors }) => {
   if (!data?.length) return null;
   return (
     <Suspense fallback={<PageSkeleton />}>
@@ -28,7 +27,7 @@ const FormDynamicZone = ({ data }) => {
 
         if (!Component) return null;
 
-        return <Component key={index} {...component} />;
+        return <Component key={index} {...component} register={register} errors={errors} />;
       })}
     </Suspense>
   );
