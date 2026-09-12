@@ -22,13 +22,13 @@ const Header = () => {
           {data.navigation.navigation.map((item, index) => {
             if (item.linkType == 'Normal') {
               return (
-                <a key={index} href={item.link}>
+                <a onClick={()=>{setOpen(false)}} key={index} href={item.link}>
                   {item.text}
                 </a>
               );
             } else {
               return (
-                <a key={index} href={item.link} className="btn btn-fill">
+                <a onClick={()=>{setOpen(false)}} key={index} href={item.link} className="btn btn-fill">
                   {item.text}
                 </a>
               );
