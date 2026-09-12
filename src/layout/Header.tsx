@@ -3,10 +3,20 @@ import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 import { appendBaseUrl } from '../helpers/common';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLocale } from '@/src/store/localeSlice';
 
 const Header = () => {
-  const [open,setOpen] = useState(false)
-  const { data, loading, error } = useQuery(NAVIGATION_QUERY);
+  const locale = useSelector((state) => state.locale.locale);
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+  const { data, loading, error } = useQuery(NAVIGATION_QUERY, {
+    variables: {
+      locale: locale,
+    },
+    fetchPolicy: 'no-cache',
+  });
   if (loading) return <PageSkeleton />;
   if (error) return <p>Error</p>;
 
@@ -16,19 +26,32 @@ const Header = () => {
     <header>
       <div className="header-inner">
         <a href="#hero" className="wordmark">
-          <img src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img"/>
+          <img src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
         </a>
         <nav className={`primary ${open ? 'open' : ''}`} id="primaryNav">
           {data.navigation.navigation.map((item, index) => {
             if (item.linkType == 'Normal') {
               return (
-                <a onClick={()=>{setOpen(false)}} key={index} href={item.link}>
+                <a
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  key={index}
+                  href={item.link}
+                >
                   {item.text}
                 </a>
               );
             } else {
               return (
-                <a onClick={()=>{setOpen(false)}} key={index} href={item.link} className="btn btn-fill">
+                <a
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  key={index}
+                  href={item.link}
+                  className="btn btn-fill"
+                >
                   {item.text}
                 </a>
               );
@@ -36,13 +59,38 @@ const Header = () => {
           })}
 
           <span className="nav-lang mono">
-            <a href="#" className="active">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(setLocale('en'));
+              }}
+              className={`${locale == 'en' ? 'active' : ''}`}
+            >
               EN
             </a>
-            |<a href="#">DE</a>
+            |
+            <a
+              className={`${locale == 'de' ? 'active' : ''}`}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(setLocale('de'));
+              }}
+            >
+              DE
+            </a>
           </span>
         </nav>
-        <button onClick={()=>{setOpen(!open)}} className="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <button
+          onClick={() => {
+            setOpen(!open);
+          }}
+          className="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
           <svg width={24} height={24} viewBox="0 0 24 24" fill="none">
             <path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
           </svg>

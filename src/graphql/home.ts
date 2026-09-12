@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const HOME_QUERY = gql`
-  query Home {
-    home {
+  query Home($locale: I18NLocaleCode) {
+    home(locale: $locale) {
       content {
         ... on ComponentCommonHero {
           blockHeading {

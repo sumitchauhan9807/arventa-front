@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import ReactQueryProvider from '@/src/http-client/ReactQueryProvider';
 import ApolloProvider from '@/src/http-client/ApolloProvider';
+import Providers from './providers';
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -26,7 +27,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       </head>
       <body className="min-h-full flex flex-col">
         <ReactQueryProvider>
-          <ApolloProvider>{children}</ApolloProvider>
+          <ApolloProvider>
+            {' '}
+            <Providers>{children}</Providers>
+          </ApolloProvider>
         </ReactQueryProvider>
       </body>
     </html>

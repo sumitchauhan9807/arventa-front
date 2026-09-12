@@ -3,9 +3,16 @@ import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 import StrapiRichText from '../helpers/StrapiText';
 import { appendBaseUrl } from '../helpers/common';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
-  const { data, loading, error } = useQuery(FOOTER_QUERY);
+  const locale = useSelector((state) => state.locale.locale);
+  const { data, loading, error } = useQuery(FOOTER_QUERY, {
+    variables: {
+      locale: locale,
+    },
+    fetchPolicy: 'no-cache',
+  });
   if (loading) return <PageSkeleton />;
   if (error) return <p>Error</p>;
 
@@ -23,7 +30,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="#hero" className="wordmark">
-              <img src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img"/>
+              <img src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img" />
             </a>
             <p>{footerTop.address}</p>
           </div>
