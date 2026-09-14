@@ -20,6 +20,10 @@ export const HOME_QUERY = gql`
             name
             active
           }
+          videoHeight
+          video {
+            url
+          }
         }
         ... on ComponentCommonCountUpSection {
           countUpSection {
@@ -85,6 +89,9 @@ export const HOME_QUERY = gql`
             heading
             subHeading
           }
+          video {
+            url
+          }
         }
         ... on ComponentCommonDescriptionLists {
           blockHeading {
@@ -148,13 +155,31 @@ export const HOME_QUERY = gql`
               ... on ComponentFormAddressField {
                 name
                 label
-                addressFieldSize:size
+                addressFieldSize: size
                 minLength
                 maxLength
               }
               ... on ComponentFormFormButton {
                 label
               }
+            }
+          }
+        }
+        ... on ComponentCommonTeamComponent {
+          blockHeading {
+            content
+            heading
+            subHeading
+          }
+          team {
+            designation
+            facebook
+            instagram
+            linkedin
+            name
+            twitter
+            picture {
+              url
             }
           }
         }

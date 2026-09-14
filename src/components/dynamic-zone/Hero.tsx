@@ -1,6 +1,9 @@
+import { appendBaseUrl } from '@/src/helpers/common';
 import React from 'react';
 
 const Hero = (props) => {
+  // return <VideoHero data={props}/>
+  return <HeroVideo data={props}/>
   return (
     <section id="hero">
       <div className="glow glow-top" />
@@ -39,3 +42,46 @@ const GetText = ({ text }) => {
     </>
   );
 };
+
+const HeroVideo = ({data}) => {
+  return (
+    <section id="hero" className={`relative h-[${data.videoHeight}px] overflow-hidden`}>
+      {/* Background Video */}
+      <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover">
+        <source src={appendBaseUrl(data.video.url)} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Existing glow effects */}
+      <div className="glow glow-top relative z-10" />
+      <div className="glow glow-hero-spread relative z-10" />
+
+      {/* Hero Content */}
+      <div className="wrap relative z-10">
+        <p className="route-tag" style={{ justifyContent: 'center' }}>
+          {data.blockHeading.subHeading}
+        </p>
+
+        <h1>
+          <GetText text={data.blockHeading.heading} />
+        </h1>
+
+        <p style={{color:"white"}}  className="lead">{data.blockHeading.content}</p>
+
+        <div className="hero-ctas">
+          <a href={data.button1.link} className="btn btn-fill">
+            {data.button1.name}
+          </a>
+
+          <a href={data.button2.link} className="btn btn-outline">
+            {data.button2.name}
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
