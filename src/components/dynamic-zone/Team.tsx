@@ -64,8 +64,7 @@ const Team = (props) => {
                           // style={{height:"600px"}}
                             className="
                               w-full
-                              max-h-[400px]
-                              max-h-[500px]
+                              h-[500px]
                               object-cover
                               grayscale
                              group-hover:grayscale-0
