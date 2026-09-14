@@ -10,6 +10,7 @@ const NetworkSection = lazy(() => import('./NetworkSection'));
 const FAQ = lazy(() => import('./FAQ'));
 const ContactForm = lazy(() => import('./ContactForm'));
 const Team = lazy(() => import('./Team'));
+const Partners = lazy(() => import('./Partners'));
 
 // ComponentCommonContactForm
 
@@ -23,8 +24,8 @@ const componentMap = {
   ComponentCommonNetworkComponent: NetworkSection,
   ComponentCommonFaq: FAQ,
   ComponentCommonContactForm: ContactForm,
-  ComponentCommonTeamComponent:Team
-
+  ComponentCommonTeamComponent: Team,
+  ComponentCommonPartners: Partners,
   // add others here
 };
 

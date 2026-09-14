@@ -93,6 +93,18 @@ export const HOME_QUERY = gql`
             url
           }
         }
+        ... on ComponentCommonPartners {
+          blockHeading {
+            heading
+            content
+            subHeading
+          }
+          logos {
+            image {
+              url
+            }
+          }
+        }
         ... on ComponentCommonDescriptionLists {
           blockHeading {
             subHeading

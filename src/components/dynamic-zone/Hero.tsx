@@ -45,7 +45,7 @@ const GetText = ({ text }) => {
 
 const HeroVideo = ({data}) => {
   return (
-    <section id="hero" className={`relative h-[${data.videoHeight}px] overflow-hidden`}>
+    <section style={{height:data.videoHeight+"px"}} id="hero" className={`relative !h-[${data.videoHeight}px] overflow-hidden`}>
       {/* Background Video */}
       <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover">
         <source src={appendBaseUrl(data.video.url)} type="video/mp4" />
