@@ -5,7 +5,7 @@ const Team = (props) => {
   const teamCount = team.length;
 
   return (
-    <div>
+    <div id="team">
       <div className="flex items-center justify-center min-h-screen bg-white">
         <div className="flex flex-col w-full">
           <div className="flex flex-col mt-8">
