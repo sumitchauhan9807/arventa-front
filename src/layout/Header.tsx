@@ -21,12 +21,12 @@ const Header = () => {
   if (error) return <p>Error</p>;
 
   if (!data?.navigation) return <PageSkeleton />;
-  // console.log(data.navigation);
+  console.log(data.navigation);
   return (
     <header>
       <div className="header-inner">
         <a href="#hero" className="wordmark">
-          <img src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
+          <img style={{height:data.navigation.height,width:data.navigation.width}} src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
         </a>
         <nav className={`primary ${open ? 'open' : ''}`} id="primaryNav">
           {data.navigation.navigation.map((item, index) => {

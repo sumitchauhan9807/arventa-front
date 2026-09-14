@@ -52,30 +52,25 @@ const Team = (props) => {
                             shadow-lg
                             shadow-gray-300/40
                             group
-                            transform-gpu
-                            transition-all
-                            duration-500
-                            ease-out
-                            hover:-translate-y-2
-                            hover:scale-[1.02]
+                           
+                            
+                           
                             hover:shadow-2xl
                             hover:shadow-indigo-500/30
                           `}
                         >
                           {/* Team Image */}
                           <img
+                          // style={{height:"600px"}}
                             className="
                               w-full
                               max-h-[400px]
+                              max-h-[500px]
                               object-cover
                               grayscale
-                              transition-all
-                              duration-500
-                              ease-out
-                              transform-gpu
-                              group-hover:grayscale-0
-                              group-hover:opacity-60
-                              group-hover:scale-[1.03]
+                             group-hover:grayscale-0
+                              
+                            
                             "
                             src={item?.picture?.url ? appendBaseUrl(item.picture.url) : 'https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?fit=clamp&w=400&h=400&q=80'}
                             alt={item?.name || 'Team member'}

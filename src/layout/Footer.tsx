@@ -30,7 +30,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="#hero" className="wordmark">
-              <img src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img" />
+              <img style={{height:footerTop.height,width:footerTop.width}} src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img" />
             </a>
             <p>{footerTop.address}</p>
           </div>
