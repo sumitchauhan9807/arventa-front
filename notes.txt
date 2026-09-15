@@ -14,3 +14,30 @@ xing - 3
 linkedin -1
 instagram -5
 collobration -6
+
+
+
+
+client A
+monday        openTime    closeTime   isWorking  clientNo name
+tuesday
+wed
+thrus
+fri
+sat
+sun
+
+
+ClientB 
+monday        openTime    closeTime    isWorking  clientNo name
+tuesday
+wed
+thrus
+fri
+sat
+sun
+
+
+
+
+add a cient -> data aboyt client 

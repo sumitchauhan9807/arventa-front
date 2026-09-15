@@ -94,13 +94,13 @@ const rootVariables = {
 
 export default function Home() {
   const locale = useSelector((state) => state.locale.locale);
-  useEffect(() => {
-    const root = document.documentElement;
+  // useEffect(() => {
+  //   const root = document.documentElement;
 
-    Object.entries(rootVariables).forEach(([key, value]) => {
-      root.style.setProperty(key, value);
-    });
-  }, []);
+  //   Object.entries(rootVariables).forEach(([key, value]) => {
+  //     root.style.setProperty(key, value);
+  //   });
+  // }, []);
   // console.log(locale)
   const { data, loading, error } = useQuery(HOME_QUERY, {
     variables: {

@@ -1,9 +1,11 @@
+import '@/app/team.css';
 import { appendBaseUrl } from '@/src/helpers/common';
+import { useState } from 'react';
 
 const Team = (props) => {
   const team = props.team || [];
   const teamCount = team.length;
-
+  return <TeamNew data={props} />;
   return (
     <section style={{ padding: '50px' }} id="team" className="on-grey">
       <div className="flex items-center justify-center">
@@ -61,7 +63,7 @@ const Team = (props) => {
                         >
                           {/* Team Image */}
                           <img
-                          // style={{height:"600px"}}
+                            // style={{height:"600px"}}
                             className="
                               w-full
                               h-[500px]
@@ -310,3 +312,50 @@ const Team = (props) => {
 };
 
 export default Team;
+
+const TeamNew = ({ data }) => {
+  const [activeMember, setActiveMember] = useState(null);
+  return (
+    <section className="team-section" id="team">
+      <div className="team-container">
+        {/* HEADER */}
+        <div className="team-header">
+          <h1>{data.blockHeading.heading}</h1>
+          <p>{data.blockHeading.content}</p>
+        </div>
+        {/* TEAM GRID */}
+        <div className="team-grid">
+          {/* TEAM MEMBER 1 */}
+          {data.team.map((item, index) => {
+            return (
+              <div key={index} className="team-member">
+                <div className={`team-image-wrapper ${activeMember === index ? 'touch-active' : ''}`} onClick={() => setActiveMember(activeMember === index ? null : index)}>
+                  <img  className="team-image" src={appendBaseUrl(item.picture.url)} alt="Sarah Johnson" />
+                  {/* SOCIAL OVERLAY */}
+                  <div className="social-overlay">
+                    <a href="#" className="social-link linkedin" aria-label="LinkedIn">
+                      <i className="mdi mdi-linkedin" />
+                    </a>
+                    <a href="#" className="social-link twitter" aria-label="Twitter">
+                      <i className="mdi mdi-twitter" />
+                    </a>
+                    <a href="#" className="social-link instagram" aria-label="Instagram">
+                      <i className="mdi mdi-instagram" />
+                    </a>
+                    <a href="#" className="social-link facebook" aria-label="Facebook">
+                      <i className="mdi mdi-facebook" />
+                    </a>
+                  </div>
+                </div>
+                <div className="team-details">
+                  <h2 className="team-name">{item.name}</h2>
+                  <p className="team-designation">{item.designation}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};

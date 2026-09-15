@@ -103,6 +103,8 @@ export const HOME_QUERY = gql`
             image {
               url
             }
+            name
+            link
           }
         }
         ... on ComponentCommonDescriptionLists {
@@ -192,6 +194,13 @@ export const HOME_QUERY = gql`
             twitter
             picture {
               url
+            }
+            socialMedia {
+              name
+              link
+              icon {
+                url
+              }
             }
           }
         }
