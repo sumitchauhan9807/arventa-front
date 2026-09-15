@@ -99,7 +99,7 @@ export const HOME_QUERY = gql`
             content
             subHeading
           }
-          logos {
+          logos(pagination: { limit: 1000 }) {
             image {
               url
             }
@@ -159,7 +159,7 @@ export const HOME_QUERY = gql`
                 name
                 dropdownFieldSize: size
                 label
-                options {
+                options(pagination: { limit: 1000 }) {
                   label
                   value
                 }

@@ -7,9 +7,100 @@ import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 
 import DynamicZone from '@/src/components/dynamic-zone';
+import { useEffect } from 'react';
+
+const rootVariables3 = {
+   "--bg-main": "#050505",
+  "--bg-card": "#0F0F0F",
+  "--bg-card-hover": "#151515",
+
+  "--accent": "#FF9F1C",
+  "--accent-hover": "#FFB84D",
+  "--accent-dim": "rgba(255, 159, 28, 0.15)",
+
+  "--text-main": "#FFFFFF",
+  "--text-muted": "#999999",
+  "--border-light": "rgba(255, 255, 255, 0.08)",
+  "--border-accent": "rgba(255, 159, 28, 0.3)",
+
+  "--bg-paper": "#FBFBF9",
+  "--bg-paper-card": "#FFFFFF",
+  "--bg-lime": "#FFF0D6",
+  "--bg-lime-card": "#FFF7E8",
+  "--bg-grey": "#F0F0EE",
+  "--bg-grey-card": "#FFFFFF",
+  "--ink": "#0A0A0A",
+  "--ink-muted": "#63645C",
+  "--border-dark": "rgba(10, 10, 10, 0.09)",
+  "--accent-ink": "#B86600",
+
+  "--radius-m": "16px",
+  "--radius-s": "8px",
+};
+const rootVariables2 = {
+   "--bg-main": "#050505",
+  "--bg-card": "#0F0F0F",
+  "--bg-card-hover": "#151515",
+
+  "--accent": "#38BDF8",
+  "--accent-hover": "#67D3FF",
+  "--accent-dim": "rgba(56, 189, 248, 0.15)",
+
+  "--text-main": "#FFFFFF",
+  "--text-muted": "#999999",
+  "--border-light": "rgba(255, 255, 255, 0.08)",
+  "--border-accent": "rgba(56, 189, 248, 0.3)",
+
+  "--bg-paper": "#FBFBF9",
+  "--bg-paper-card": "#FFFFFF",
+  "--bg-lime": "#DDF4FD",
+  "--bg-lime-card": "#EFF9FE",
+  "--bg-grey": "#F0F0EE",
+  "--bg-grey-card": "#FFFFFF",
+  "--ink": "#0A0A0A",
+  "--ink-muted": "#63645C",
+  "--border-dark": "rgba(10, 10, 10, 0.09)",
+  "--accent-ink": "#0878A8",
+
+  "--radius-m": "16px",
+  "--radius-s": "8px",
+};
+const rootVariables = {
+  "--bg-main": "#050505",
+  "--bg-card": "#0F0F0F",
+  "--bg-card-hover": "#151515",
+  "--accent": "#D1F82A",
+  "--accent-hover": "#E2FF5A",
+  "--accent-dim": "rgba(209, 248, 42, 0.15)",
+  "--text-main": "#FFFFFF",
+  "--text-muted": "#999999",
+  "--border-light": "rgba(255, 255, 255, 0.08)",
+  "--border-accent": "rgba(209, 248, 42, 0.3)",
+
+  "--bg-paper": "#FBFBF9",
+  "--bg-paper-card": "#FFFFFF",
+  "--bg-lime": "#EFF9CE",
+  "--bg-lime-card": "#F8FCE9",
+  "--bg-grey": "#F0F0EE",
+  "--bg-grey-card": "#FFFFFF",
+  "--ink": "#0A0A0A",
+  "--ink-muted": "#63645C",
+  "--border-dark": "rgba(10, 10, 10, 0.09)",
+  "--accent-ink": "#6E8B00",
+
+  "--radius-m": "16px",
+  "--radius-s": "8px",
+};
 
 export default function Home() {
   const locale = useSelector((state) => state.locale.locale);
+  useEffect(() => {
+    const root = document.documentElement;
+
+    Object.entries(rootVariables).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  }, []);
   // console.log(locale)
   const { data, loading, error } = useQuery(HOME_QUERY, {
     variables: {
@@ -36,6 +127,10 @@ export default function Home() {
     </>
   );
 }
+
+
+
+
 const Team5 = () => {
   return (
     <div>

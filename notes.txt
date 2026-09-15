@@ -1,2 +1,16 @@
+recaptcha:-
+
 6LeeRrUtAAAAAEsa9RbsRKg6gfXTmuL87SkQAJWQ -> sitekey
 6LeeRrUtAAAAAMNNMSXvfEI6ibdMD7Adgw0_1tai  --> secret key
+
+
+1. emails for different domains
+2. bottom text in partners
+3. social media icons in teams
+
+facebook -2
+X -4 
+xing - 3
+linkedin -1
+instagram -5
+collobration -6
