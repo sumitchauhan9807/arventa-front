@@ -341,7 +341,7 @@ const TeamNew = ({ data }) => {
                     return (
                       <a
                         key={socialIndex}
-                        href={social?.url || '#'}
+                        href={social?.link || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="social-link"
