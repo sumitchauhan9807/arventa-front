@@ -111,7 +111,7 @@ export default function Home() {
 
   if (loading) return <PageSkeleton />;
   if (error) return <p>Error</p>;
-  console.log(data?.home.content);
+  // console.log(data?.home.content);
   // console.log(data)
 
   // return null

@@ -21,7 +21,7 @@ const Header = () => {
   if (error) return <p>Error</p>;
 
   if (!data?.navigation) return <PageSkeleton />;
-  console.log(data.navigation);
+  // console.log(data.navigation);
   return (
     <header>
       <div className="header-inner">

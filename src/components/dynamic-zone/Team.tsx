@@ -314,6 +314,7 @@ const Team = (props) => {
 export default Team;
 
 const TeamNew = ({ data }) => {
+  console.log(data, 'Asdasdasd');
   const [activeMember, setActiveMember] = useState(null);
   return (
     <section className="team-section" id="team">
@@ -330,22 +331,32 @@ const TeamNew = ({ data }) => {
             return (
               <div key={index} className="team-member">
                 <div className={`team-image-wrapper ${activeMember === index ? 'touch-active' : ''}`} onClick={() => setActiveMember(activeMember === index ? null : index)}>
-                  <img  className="team-image" src={appendBaseUrl(item.picture.url)} alt="Sarah Johnson" />
+                  <img className="team-image" src={appendBaseUrl(item.picture.url)} alt="Sarah Johnson" />
                   {/* SOCIAL OVERLAY */}
+                  
                   <div className="social-overlay">
-                    <a href="#" className="social-link linkedin" aria-label="LinkedIn">
-                      <i className="mdi mdi-linkedin" />
-                    </a>
-                    <a href="#" className="social-link twitter" aria-label="Twitter">
-                      <i className="mdi mdi-twitter" />
-                    </a>
-                    <a href="#" className="social-link instagram" aria-label="Instagram">
-                      <i className="mdi mdi-instagram" />
-                    </a>
-                    <a href="#" className="social-link facebook" aria-label="Facebook">
-                      <i className="mdi mdi-facebook" />
-                    </a>
-                  </div>
+                  {(item?.socialMedia || []).map((social, socialIndex) => {
+                    if (!social?.icon?.url) return null;
+
+                    return (
+                      <a
+                        key={socialIndex}
+                        href={social?.url || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <img
+                          src={appendBaseUrl(social.icon.url)}
+                          alt="Social media"
+                          className="social-icon"
+                        />
+                      </a>
+                    );
+                  })}
+                </div>
+                  
                 </div>
                 <div className="team-details">
                   <h2 className="team-name">{item.name}</h2>
