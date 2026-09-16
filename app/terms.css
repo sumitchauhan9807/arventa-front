@@ -1,0 +1,31 @@
+.terms-content h1 {
+  margin-bottom: 24px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.terms-content h2 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.terms-content p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.terms-content ul {
+  margin: 16px 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+
+.terms-content li {
+  margin-bottom: 8px;
+}
+
+.terms-content strong {
+  font-weight: 700;
+}

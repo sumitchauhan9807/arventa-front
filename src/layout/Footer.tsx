@@ -1,3 +1,4 @@
+"use client"
 import { FOOTER_QUERY } from '@/src/graphql/footer';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';

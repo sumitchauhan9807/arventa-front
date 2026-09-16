@@ -1,3 +1,4 @@
+"use client"
 import { NAVIGATION_QUERY } from '@/src/graphql/navigation';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
@@ -5,6 +6,7 @@ import { appendBaseUrl } from '../helpers/common';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLocale } from '@/src/store/localeSlice';
+import Link from 'next/link';
 
 const Header = () => {
   const locale = useSelector((state) => state.locale.locale);
@@ -17,6 +19,13 @@ const Header = () => {
     },
     fetchPolicy: 'no-cache',
   });
+
+  const linkUrl = (url:string) => {
+    if(window.location.pathname == '/'){ 
+      return url
+    }
+    return '/'+url
+  }
   if (loading) return <PageSkeleton />;
   if (error) return <p>Error</p>;
 
@@ -32,15 +41,15 @@ const Header = () => {
           {data.navigation.navigation.map((item, index) => {
             if (item.linkType == 'Normal') {
               return (
-                <a
+                <Link
                   onClick={() => {
                     setOpen(false);
                   }}
                   key={index}
-                  href={item.link}
+                  href={"/"+item.link}
                 >
                   {item.text}
-                </a>
+                </Link>
               );
             } else {
               return (
