@@ -101,6 +101,7 @@ const ContactForm = (props) => {
         phone: data.phone,
         surname: data.surname,
         captchaToken: reCaptcha,
+        domain:window.location.hostname
       });
       setLoading(false);
 
