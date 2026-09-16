@@ -188,7 +188,7 @@ const ContactForm = (props) => {
           </div>
           <div className="full submit-row">
             <button disabled={loading} type="submit" id="quoteBtn" className="btn btn-fill" style={{ width: '100%', marginTop: '10px' }}>
-              {!loading && <span id="quoteBtnText">Get a Quote</span>}
+              {!loading && <span id="quoteBtnText">{props.contact_form.formButtonText}</span>}
               {loading && (
                 <span id="quoteLoader">
                   <span className="spinner"></span> Please wait...

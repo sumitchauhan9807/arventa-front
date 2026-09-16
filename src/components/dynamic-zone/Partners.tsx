@@ -20,7 +20,7 @@ const Partners = (props) => {
 
   return (
     <section className="on-grey py-20" id="partners">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto  px-6 lg:px-8">
         {/* Heading */}
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest route-tag">{props.blockHeading.heading}</p>
@@ -29,7 +29,7 @@ const Partners = (props) => {
         </div>
 
         {/* Logos */}
-        <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 items-start gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mx-auto mt-14 grid  grid-cols-2 items-start gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-8">
           {props.logos.map((item, index) => {
             return (
               <div

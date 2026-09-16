@@ -144,6 +144,7 @@ export const HOME_QUERY = gql`
             successText
             failedText
             name
+            formButtonText
             formFields {
               ... on ComponentFormTextField {
                 label

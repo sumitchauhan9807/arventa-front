@@ -8,6 +8,11 @@ recaptcha:-
 2. bottom text in partners
 3. social media icons in teams
 
+
+
+--> make logo large width
+--> get a quote from backend
+
 facebook -2
 X -4 
 xing - 3
