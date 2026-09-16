@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { axiosClient } from '@/src/http-client/axios';
+import { useSelector } from 'react-redux';
 
 function createZodSchema(fields) {
   const shape = {};
@@ -63,6 +64,7 @@ function createZodSchema(fields) {
 }
 
 const ContactForm = (props) => {
+  const locale = useSelector((state) => state.locale.locale);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [reCaptcha, setReCaptcha] = useState('');
   const [loading, setLoading] = useState(false);
@@ -139,52 +141,8 @@ const ContactForm = (props) => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="quote-form card" id="quoteForm">
           <Form data={props.contact_form.formFields} register={register} errors={errors} />
-          {/* <div className="field">
-            <label htmlFor="f-name">Name</label>
-            <input id="f-name" type="text" required />
-          </div>
-          <div className="field">
-            <label htmlFor="f-company">Company</label>
-            <input id="f-company" type="text" required />
-          </div>
-          <div className="field">
-            <label htmlFor="f-email">Work email</label>
-            <input id="f-email" type="email" required />
-          </div>
-          <div className="field">
-            <label htmlFor="f-phone">Phone</label>
-            <input id="f-phone" type="tel" />
-          </div>
-          <div className="field full">
-            <label htmlFor="f-size">Team size</label>
-            <select id="f-size">
-              <option>1 to 10 agents</option>
-              <option>11 to 50 agents</option>
-              <option>51 to 200 agents</option>
-              <option>200+ agents</option>
-            </select>
-          </div>
-          <div className="field full">
-            <label htmlFor="f-interest">Area of interest</label>
-            <select id="f-interest">
-              <option>Carrier &amp; Network</option>
-              <option>Cloud &amp; Communications</option>
-              <option>Software &amp; AI</option>
-              <option>Tornado Dialer</option>
-              <option>Call Con Dialer</option>
-            </select>
-          </div>
-          <div className="field full">
-            <label htmlFor="f-msg">Message</label>
-            <textarea id="f-msg" defaultValue={''} />
-          </div>
-          <div className="full submit-row">
-            <button type="submit" className="btn btn-fill" style={{ width: '100%' }}>
-              Get a Quote
-            </button>
-          </div> */}
-          <div style={{width:"50px"}} className="field full recaptcha-field">
-            <ReCAPTCHA sitekey="6LeeRrUtAAAAAEsa9RbsRKg6gfXTmuL87SkQAJWQ" onChange={onChange} />
+          <div style={{ width: '50px' }} className="field full recaptcha-field">
+            <ReCAPTCHA sitekey="6LeeRrUtAAAAAEsa9RbsRKg6gfXTmuL87SkQAJWQ" onChange={onChange} hl={locale} />
           </div>
           <div className="full submit-row">
             <button disabled={loading} type="submit" id="quoteBtn" className="btn btn-fill" style={{ width: '100%', marginTop: '10px' }}>
