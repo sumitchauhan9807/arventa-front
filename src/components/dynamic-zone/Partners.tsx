@@ -23,7 +23,7 @@ const Partners = (props) => {
       <div className="mx-auto  px-6 lg:px-8">
         {/* Heading */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest route-tag">{props.blockHeading.heading}</p>
+          <p style={{fontSize:"27px"}} className="text-sm font-semibold uppercase tracking-widest route-tag">{props.blockHeading.heading}</p>
 
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{props.blockHeading.content}</h2>
         </div>
