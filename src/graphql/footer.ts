@@ -2,9 +2,17 @@ import { gql } from '@apollo/client';
 
 export const FOOTER_QUERY = gql`
   query Footer($locale: I18NLocaleCode) {
-    footer(locale:$locale) {
+    footer(locale: $locale) {
       bottomText1
       bottomText2
+      privacyPolicy {
+        name
+        link
+      }
+      termsOfUse {
+        name
+        link
+      }
       footerCallUs {
         heading
         contactNumber {

@@ -88,12 +88,12 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center gap-2 sm:ml-auto sm:flex-row sm:gap-4">
-            <a href="/privacy-policy" rel="noopener" className="made-by-link">
-              Privacy Policy
+            <a target='_blank' href="/privacy-policy" rel="noopener" className="made-by-link">
+              {data.footer.privacyPolicy.name}
             </a>
 
-            <a href="/terms-of-use" rel="noopener" className="made-by-link">
-              Terms of Use
+            <a target='_blank' href="/terms-of-use" rel="noopener" className="made-by-link">
+              {data.footer.termsOfUse.name}
             </a>
           </div>
         </div>
