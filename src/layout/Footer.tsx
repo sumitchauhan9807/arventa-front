@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { FOOTER_QUERY } from '@/src/graphql/footer';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
@@ -31,7 +31,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="#hero" className="wordmark">
-              <img style={{height:footerTop.height,width:footerTop.width}} src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img" />
+              <img style={{ height: footerTop.height, width: footerTop.width }} src={appendBaseUrl(footerTop.logo.url)} alt="Arventa Networks" className="logo-img" />
             </a>
             <p>{footerTop.address}</p>
           </div>
@@ -78,11 +78,24 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          <span>{data.footer.bottomText1}</span>
-          <a href="#" rel="noopener" className="made-by-link">
-            {data.footer.bottomText2}
-          </a>
+        <div className="footer-bottom flex flex-col items-center gap-3 sm:flex-row sm:items-center">
+          <div className="text-center sm:text-left">
+            <span>{data.footer.bottomText1}</span>
+
+            <a href="#" rel="noopener" className="made-by-link ml-2">
+              {data.footer.bottomText2}
+            </a>
+          </div>
+
+          <div className="flex flex-col items-center gap-2 sm:ml-auto sm:flex-row sm:gap-4">
+            <a href="/privacy-policy" rel="noopener" className="made-by-link">
+              Privacy Policy
+            </a>
+
+            <a href="/terms-of-use" rel="noopener" className="made-by-link">
+              Terms of Use
+            </a>
+          </div>
         </div>
       </div>
     </footer>
