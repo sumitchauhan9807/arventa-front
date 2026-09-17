@@ -34,9 +34,9 @@ const Header = () => {
   return (
     <header>
       <div className="header-inner">
-        <a href="#hero" className="wordmark">
+        <Link href="/" className="wordmark">
           <img style={{height:data.navigation.height,width:data.navigation.width}} src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
-        </a>
+        </Link>
         <nav className={`primary ${open ? 'open' : ''}`} id="primaryNav">
           {data.navigation.navigation.map((item, index) => {
             if (item.linkType == 'Normal') {
