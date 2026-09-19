@@ -1,116 +1,6 @@
-
 import { useState } from "react";
-import "@/app/cookie.css";
-import { useSelector } from "react-redux";
-
-const cookieContent = {
-  en: {
-    banner: {
-      title: "We are using cookies to improve your experience!",
-      description:
-        'By clicking "Allow all", you agree to use of all cookies.',
-      visitText: "Visit our",
-      policyText: "Cookies Policy",
-      policyLink: "#",
-      policySuffix: "to learn more.",
-      allowAllButton: "Allow all",
-      manageCookiesButton: "Manage cookies",
-    },
-
-    preferences: {
-      title: "Cookie preferences",
-      description: "Choose which cookies you would like to allow.",
-      closeLabel: "Close",
-
-      types: [
-        {
-          key: "necessary",
-          title: "Necessary cookies",
-          description: "Required for the website to work properly.",
-          required: true,
-        },
-        {
-          key: "analytics",
-          title: "Analytics cookies",
-          description:
-            "Help us understand how visitors use the website.",
-          required: false,
-        },
-        {
-          key: "marketing",
-          title: "Marketing cookies",
-          description:
-            "Used to provide relevant advertising and marketing.",
-          required: false,
-        },
-      ],
-
-      cancelButton: "Cancel",
-      saveButton: "Save preferences",
-    },
-  },
-
-  de: {
-    banner: {
-      title: "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern!",
-      description:
-        'Indem Sie auf „Alle erlauben“ klicken, stimmen Sie der Verwendung aller Cookies zu.',
-      visitText: "Besuchen Sie unsere",
-      policyText: "Cookie-Richtlinie",
-      policyLink: "#",
-      policySuffix: "um mehr zu erfahren.",
-      allowAllButton: "Alle erlauben",
-      manageCookiesButton: "Cookies verwalten",
-    },
-
-    preferences: {
-      title: "Cookie-Einstellungen",
-      description: "Wählen Sie aus, welche Cookies Sie zulassen möchten.",
-      closeLabel: "Schließen",
-
-      types: [
-        {
-          key: "necessary",
-          title: "Notwendige Cookies",
-          description:
-            "Erforderlich, damit die Website ordnungsgemäß funktioniert.",
-          required: true,
-        },
-        {
-          key: "analytics",
-          title: "Analyse-Cookies",
-          description:
-            "Helfen uns zu verstehen, wie Besucher die Website nutzen.",
-          required: false,
-        },
-        {
-          key: "marketing",
-          title: "Marketing-Cookies",
-          description:
-            "Werden verwendet, um relevante Werbung und Marketing bereitzustellen.",
-          required: false,
-        },
-      ],
-
-      cancelButton: "Abbrechen",
-      saveButton: "Einstellungen speichern",
-    },
-  },
-};
-
-/**
- * Returns cookie content based on the Redux locale.
- * Falls back to English if the locale is not available.
- */
-const getCookieContent = (locale) => {
-  return cookieContent[locale] || cookieContent.en;
-};
-
+import '@/app/cookie.css'
 const CookiePolicy = () => {
-  const locale = useSelector((state) => state.locale.locale);
-
-  const content = getCookieContent(locale);
-
   const [showBanner, setShowBanner] = useState(() => {
     return !localStorage.getItem("cookie-consent");
   });
@@ -150,13 +40,6 @@ const CookiePolicy = () => {
     setShowBanner(false);
   };
 
-  const handlePreferenceChange = (key, value) => {
-    setPreferences((currentPreferences) => ({
-      ...currentPreferences,
-      [key]: value,
-    }));
-  };
-
   if (!showBanner && !showPreferences) {
     return null;
   }
@@ -171,7 +54,6 @@ const CookiePolicy = () => {
         >
           <div className="p-4 bg-layer rounded-xl shadow-2xs">
             <div className="flex gap-x-5">
-
               {/* Cookie SVG */}
               <svg
                 className="hidden sm:block shrink-0 w-20"
@@ -275,21 +157,22 @@ const CookiePolicy = () => {
                 />
               </svg>
 
+              {/* Content */}
               <div className="grow">
                 <h2 className="text-lg font-semibold text-foreground">
-                  {content.banner.title}
+                  We are using cookies to improve your experience!
                 </h2>
 
                 <p className="mt-2 text-sm text-muted-foreground-2">
-                  {content.banner.description}{" "}
-                  {content.banner.visitText}{" "}
+                  By clicking "Allow all", you agree to use of all cookies.
+                  Visit our{" "}
                   <a
                     className="inline-flex items-center gap-x-1.5 text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium"
-                    href={content.banner.policyLink}
+                    href="#"
                   >
-                    {content.banner.policyText}
+                    Cookies Policy
                   </a>{" "}
-                  {content.banner.policySuffix}
+                  to learn more.
                 </p>
 
                 <div className="mt-5 inline-flex gap-x-2">
@@ -298,7 +181,7 @@ const CookiePolicy = () => {
                     onClick={allowAll}
                     className="cursor-pointer py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none"
                   >
-                    {content.banner.allowAllButton}
+                    Allow all
                   </button>
 
                   <button
@@ -306,7 +189,7 @@ const CookiePolicy = () => {
                     onClick={openPreferences}
                     className="cursor-pointer py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus"
                   >
-                    {content.banner.manageCookiesButton}
+                    Manage cookies
                   </button>
                 </div>
               </div>
@@ -318,18 +201,15 @@ const CookiePolicy = () => {
       {/* Cookie Preferences Modal */}
       {showPreferences && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4">
-          <div
-            style={{ background: "black" }}
-            className="w-full max-w-lg rounded-xl bg-layer border border-layer-line shadow-xl p-6 animate-slide-up"
-          >
+          <div style={{background:"black"}} className="w-full max-w-lg rounded-xl bg-layer border border-layer-line shadow-xl p-6 animate-slide-up">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 className="text-xl font-semibold text-foreground">
-                  {content.preferences.title}
+                  Cookie preferences
                 </h2>
 
                 <p className="mt-1 text-sm text-muted-foreground-2">
-                  {content.preferences.description}
+                  Choose which cookies you would like to allow.
                 </p>
               </div>
 
@@ -337,46 +217,82 @@ const CookiePolicy = () => {
                 type="button"
                 onClick={() => setShowPreferences(false)}
                 className="cursor-pointer text-muted-foreground-2 hover:text-foreground text-xl"
-                aria-label={content.preferences.closeLabel}
+                aria-label="Close"
               >
                 ×
               </button>
             </div>
 
             <div className="mt-6 space-y-4">
-              {content.preferences.types.map((cookieType) => (
-                <div
-                  key={cookieType.key}
-                  className="flex items-center justify-between gap-4"
-                >
-                  <div>
-                    <h3 className="font-medium text-foreground">
-                      {cookieType.title}
-                    </h3>
+              {/* Necessary */}
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-medium text-foreground">
+                    Necessary cookies
+                  </h3>
 
-                    <p className="text-sm text-muted-foreground-2">
-                      {cookieType.description}
-                    </p>
-                  </div>
-
-                  <input
-                    type="checkbox"
-                    checked={
-                      cookieType.required
-                        ? true
-                        : preferences[cookieType.key]
-                    }
-                    disabled={cookieType.required}
-                    onChange={(e) =>
-                      handlePreferenceChange(
-                        cookieType.key,
-                        e.target.checked
-                      )
-                    }
-                    className="size-4"
-                  />
+                  <p className="text-sm text-muted-foreground-2">
+                    Required for the website to work properly.
+                  </p>
                 </div>
-              ))}
+
+                <input
+                  type="checkbox"
+                  checked
+                  disabled
+                  className="size-4"
+                />
+              </div>
+
+              {/* Analytics */}
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-medium text-foreground">
+                    Analytics cookies
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground-2">
+                    Help us understand how visitors use the website.
+                  </p>
+                </div>
+
+                <input
+                  type="checkbox"
+                  checked={preferences.analytics}
+                  onChange={(e) =>
+                    setPreferences({
+                      ...preferences,
+                      analytics: e.target.checked,
+                    })
+                  }
+                  className="size-4"
+                />
+              </div>
+
+              {/* Marketing */}
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-medium text-foreground">
+                    Marketing cookies
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground-2">
+                    Used to provide relevant advertising and marketing.
+                  </p>
+                </div>
+
+                <input
+                  type="checkbox"
+                  checked={preferences.marketing}
+                  onChange={(e) =>
+                    setPreferences({
+                      ...preferences,
+                      marketing: e.target.checked,
+                    })
+                  }
+                  className="size-4"
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex justify-end gap-2">
@@ -385,7 +301,7 @@ const CookiePolicy = () => {
                 onClick={() => setShowPreferences(false)}
                 className="cursor-pointer py-2 px-4 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground hover:bg-layer-hover"
               >
-                {content.preferences.cancelButton}
+                Cancel
               </button>
 
               <button
@@ -393,7 +309,7 @@ const CookiePolicy = () => {
                 onClick={savePreferences}
                 className="cursor-pointer py-2 px-4 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover"
               >
-                {content.preferences.saveButton}
+                Save preferences
               </button>
             </div>
           </div>
@@ -404,3 +320,4 @@ const CookiePolicy = () => {
 };
 
 export default CookiePolicy;
+
