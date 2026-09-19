@@ -13,6 +13,10 @@ export const FOOTER_QUERY = gql`
         name
         link
       }
+      cookiePolicy {
+        name
+        link
+      }
       footerCallUs {
         heading
         contactNumber {
