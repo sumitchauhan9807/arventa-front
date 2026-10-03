@@ -1,4 +1,4 @@
-import '@/app/partners.css';
+import '@/app/css/partners.css';
 import { appendBaseUrl } from '@/src/helpers/common';
 import { useState } from 'react';
 

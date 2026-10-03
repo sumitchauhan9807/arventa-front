@@ -1,4 +1,4 @@
-import '@/app/team.css';
+import '@/app/css/team.css';
 import { appendBaseUrl } from '@/src/helpers/common';
 import { useState } from 'react';
 

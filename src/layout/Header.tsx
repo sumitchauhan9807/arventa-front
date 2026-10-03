@@ -34,14 +34,14 @@ const Header = () => {
   return (
     <header>
       <div className="header-inner">
-        <Link href="/" className="wordmark">
+        <a href="/" className="wordmark">
           <img style={{height:data.navigation.height,width:data.navigation.width}} src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
-        </Link>
+        </a>
         <nav className={`primary ${open ? 'open' : ''}`} id="primaryNav">
           {data.navigation.navigation.map((item, index) => {
             if (item.linkType == 'Normal') {
               return (
-                <Link
+                <a
                   onClick={() => {
                     setOpen(false);
                   }}
@@ -49,7 +49,7 @@ const Header = () => {
                   href={"/"+item.link}
                 >
                   {item.text}
-                </Link>
+                </a>
               );
             } else {
               return (

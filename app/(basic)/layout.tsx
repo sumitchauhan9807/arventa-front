@@ -1,7 +1,19 @@
 import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import '../css/globals.css';
 import ReactQueryProvider from '@/src/http-client/ReactQueryProvider';
 import ApolloProvider from '@/src/http-client/ApolloProvider';
-import Providers from './providers';
+import Providers from '../providers';
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
+
 export const metadata: Metadata = {
   title: 'Arventa Networks 24/7',
   description: 'Arventa Networks 24/7',

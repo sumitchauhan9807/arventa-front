@@ -1,5 +1,5 @@
 'use client';
-import '@/app/terms.css';
+import '@/app/css/cookie.css';
 import Header from '@/src/layout/Header';
 import Footer from '@/src/layout/Footer';
 import ReactMarkdown from 'react-markdown';

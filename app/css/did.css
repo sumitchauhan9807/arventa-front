@@ -1,0 +1,3055 @@
+@import "tailwindcss";
+
+:root {
+  --bg-main: #050505;
+  --bg-card: #0F0F0F;
+  --bg-card-hover: #151515;
+  --accent: #D1F82A;
+  --accent-hover: #E2FF5A;
+  --accent-dim: rgba(209, 248, 42, 0.15);
+  --text-main: #FFFFFF;
+  --text-muted: #999999;
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(209, 248, 42, 0.3);
+
+  /* light-section tokens */
+  --bg-paper: #FBFBF9;
+  --bg-paper-card: #FFFFFF;
+  --bg-lime: #EFF9CE;
+  --bg-lime-card: #F8FCE9;
+  --bg-grey: #F0F0EE;
+  --bg-grey-card: #FFFFFF;
+  --ink: #0A0A0A;
+  --ink-muted: #63645C;
+  --border-dark: rgba(10, 10, 10, 0.09);
+  --accent-ink: #6E8B00;
+
+  --radius-m: 16px;
+  --radius-s: 8px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block
+}
+
+a {
+  background-color: #0000
+}
+
+a:active,
+a:hover {
+  outline: 0
+}
+
+b,
+strong {
+  font-weight: 700
+}
+
+h1 {
+  margin: .67em 0;
+  font-size: 2em
+}
+
+img {
+  border: 0
+}
+
+svg:not(:root) {
+  overflow: hidden
+}
+
+@font-face {
+  font-family: webflow-icons;
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBiUAAAC8AAAAYGNtYXDpP+a4AAABHAAAAFxnYXNwAAAAEAAAAXgAAAAIZ2x5ZmhS2XEAAAGAAAADHGhlYWQTFw3HAAAEnAAAADZoaGVhCXYFgQAABNQAAAAkaG10eCe4A1oAAAT4AAAAMGxvY2EDtALGAAAFKAAAABptYXhwABAAPgAABUQAAAAgbmFtZSoCsMsAAAVkAAABznBvc3QAAwAAAAAHNAAAACAAAwP4AZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpAwPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAQAAAAAwACAACAAQAAQAg5gPpA//9//8AAAAAACDmAOkA//3//wAB/+MaBBcIAAMAAQAAAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEBIAAAAyADgAAFAAAJAQcJARcDIP5AQAGA/oBAAcABwED+gP6AQAABAOAAAALgA4AABQAAEwEXCQEH4AHAQP6AAYBAAcABwED+gP6AQAAAAwDAAOADQALAAA8AHwAvAAABISIGHQEUFjMhMjY9ATQmByEiBh0BFBYzITI2PQE0JgchIgYdARQWMyEyNj0BNCYDIP3ADRMTDQJADRMTDf3ADRMTDQJADRMTDf3ADRMTDQJADRMTAsATDSANExMNIA0TwBMNIA0TEw0gDRPAEw0gDRMTDSANEwAAAAABAJ0AtAOBApUABQAACQIHCQEDJP7r/upcAXEBcgKU/usBFVz+fAGEAAAAAAL//f+9BAMDwwAEAAkAABcBJwEXAwE3AQdpA5ps/GZsbAOabPxmbEMDmmz8ZmwDmvxmbAOabAAAAgAA/8AEAAPAAB0AOwAABSInLgEnJjU0Nz4BNzYzMTIXHgEXFhUUBw4BBwYjNTI3PgE3NjU0Jy4BJyYjMSIHDgEHBhUUFx4BFxYzAgBqXV6LKCgoKIteXWpqXV6LKCgoKIteXWpVSktvICEhIG9LSlVVSktvICEhIG9LSlVAKCiLXl1qal1eiygoKCiLXl1qal1eiygoZiEgb0tKVVVKS28gISEgb0tKVVVKS28gIQABAAABwAIAA8AAEgAAEzQ3PgE3NjMxFSIHDgEHBhUxIwAoKIteXWpVSktvICFmAcBqXV6LKChmISBvS0pVAAAAAgAA/8AFtgPAADIAOgAAARYXHgEXFhUUBw4BBwYHIxUhIicuAScmNTQ3PgE3NjMxOAExNDc+ATc2MzIXHgEXFhcVATMJATMVMzUEjD83NlAXFxYXTjU1PQL8kz01Nk8XFxcXTzY1PSIjd1BQWlJJSXInJw3+mdv+2/7c25MCUQYcHFg5OUA/ODlXHBwIAhcXTzY1PTw1Nk8XF1tQUHcjIhwcYUNDTgL+3QFt/pOTkwABAAAAAQAAmM7nP18PPPUACwQAAAAAANciZKUAAAAA1yJkpf/9/70FtgPDAAAACAACAAAAAAAAAAEAAAPA/8AAAAW3//3//QW2AAEAAAAAAAAAAAAAAAAAAAAMBAAAAAAAAAAAAAAAAgAAAAQAASAEAADgBAAAwAQAAJ0EAP/9BAAAAAQAAAAFtwAAAAAAAAAKABQAHgAyAEYAjACiAL4BFgE2AY4AAAABAAAADAA8AAMAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEADQAAAAEAAAAAAAIABwCWAAEAAAAAAAMADQBIAAEAAAAAAAQADQCrAAEAAAAAAAUACwAnAAEAAAAAAAYADQBvAAEAAAAAAAoAGgDSAAMAAQQJAAEAGgANAAMAAQQJAAIADgCdAAMAAQQJAAMAGgBVAAMAAQQJAAQAGgC4AAMAAQQJAAUAFgAyAAMAAQQJAAYAGgB8AAMAAQQJAAoANADsd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzVmVyc2lvbiAxLjAAVgBlAHIAcwBpAG8AbgAgADEALgAwd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzUmVndWxhcgBSAGUAZwB1AGwAYQByd2ViZmxvdy1pY29ucwB3AGUAYgBmAGwAbwB3AC0AaQBjAG8AbgBzRm9udCBnZW5lcmF0ZWQgYnkgSWNvTW9vbi4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==)format("truetype");
+  font-weight: 400;
+  font-style: normal
+}
+
+* {
+  box-sizing: border-box
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  display: inline-block
+}
+
+.w-inline-block {
+  max-width: 100%;
+  display: inline-block
+}
+
+.w-button {
+  color: #fff;
+  line-height: inherit;
+  cursor: pointer;
+  background-color: #3898ec;
+  border: 0;
+  border-radius: 0;
+  padding: 9px 15px;
+  text-decoration: none;
+  display: inline-block
+}
+
+:where(button.w-popover-trigger) {
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  -webkit-text-decoration: inherit;
+  text-decoration: inherit;
+  background-color: #0000;
+  border: 0;
+  margin: 0;
+  padding: 0
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 10px;
+  font-weight: 700
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 38px;
+  line-height: 44px
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 32px;
+  line-height: 36px
+}
+
+h4 {
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 24px
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10px
+}
+
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-left: 40px
+}
+
+.w-embed:before,
+.w-embed:after {
+  content: " ";
+  grid-area: 1/1/2/2;
+  display: table
+}
+
+.w-embed:after {
+  clear: both
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@font-face {
+  font-family: PX Grotesk;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451a41_PxGrotesk-Regular.woff2)format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: PX Grotesk;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451a45_PxGrotesk-Bold.woff2)format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: PX Grotesk;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451a10_PxGrotesk-RegularIta.woff2)format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: PX Grotesk Bold;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451ab9_PxGrotesk-Bold.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451ab8_PxGrotesk-Bold.woff)format("woff"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451abb_PxGrotesk-Bold.otf)format("opentype"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b05a_e6e6232c3e48ad6af4aba66b2ec0f799_PxGrotesk-Bold.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b05e_c7ae07658d83d3d9cd065ff3571b6214_PxGrotesk-Bold.woff)format("woff"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b064_73cf3c62211d43f52f033f514e31fb48_PxGrotesk-Bold.otf)format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Sipgate Icons;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451b68_sipgate-icons.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451b69_sipgate-icons.eot)format("embedded-opentype"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451b64_sipgate-icons.woff)format("woff"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451b61_sipgate-icons.ttf)format("truetype"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451b65_sipgate-icons.svg)format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Tiempos;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/67c6ba4a314508259484697b_tiempos-headline-light.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/67c6ba4aff48cd64a2ebb4d0_tiempos-headline-light.woff)format("woff"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451b5f_TiemposHeadline-Light.otf)format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block
+}
+
+@font-face {
+  font-family: DIN Next LT Pro;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/678900e941dcd8f65b451a12_DINNextLTPro-Light.otf)format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Tiempos Light;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b05b_54801377c62b23005e7479c64e620a96_TiemposHeadline-Light.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b061_f87fcc00ac4b28c031bf3c78f5f6a3a9_TiemposHeadline-Light.ttf)format("truetype"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b065_b05b22950af3aded493f63d2df32e68e_TiemposHeadline-Light.otf)format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: PX Grotesk Regular;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b05c_247b9d0274d493a2d41979951dc816d1_PxGrotesk-Regular.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b05f_47fafdcbfbeccbc3db36487cbea236b2_PxGrotesk-Regular.woff)format("woff"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b063_16034e300200d4678f5ebc25870def9e_PxGrotesk-Regular.otf)format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: sipgate Icons;
+  src: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b05d_4c9a9ba1d373e93321fd3bfecaaab3f0_sipgate-icons.woff2)format("woff2"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b060_4a694a7baf784ff5e7badc624ea41aa7_sipgate-icons.woff)format("woff"), url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/69a954a94e268573f516b062_f5685c1f8b4fb04ac446bbf5d28578ff_sipgate-icons.ttf)format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+:root {
+  --sipgate-pattern-library-3346_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+  --sipgate-pattern-library-3346_sizes-font---font--primary-bold-weight: 700;
+  --sipgate-pattern-library-3346_sizes-styles---border--border-default: 1px;
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-alternate: var(--sipgate-pattern-library-3346_color-primitives---neutral--black);
+  --sipgate-pattern-library-3346_sizes-styles---radius--radius-round: 50rem;
+  --sipgate-pattern-library-3346_color-semantics---text-color--text-alternate: var(--sipgate-pattern-library-3346_color-primitives---neutral--white);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-electric-lime: var(--sipgate-pattern-library-3346_color-primitives---brand--electric-lime);
+  --sipgate-pattern-library-3346_color-semantics---text-color--text-primary: var(--sipgate-pattern-library-3346_color-primitives---neutral--black);
+  --sipgate-pattern-library-3346_sizes-styles---border--border-button: 1.5px;
+  --sipgate-pattern-library-3346---border-color--border-alternate\<deleted\|variable-88c56900-348e-e9a7-2162-5d8950c93e14\>: var(--sipgate-pattern-library-3346---base-color-neutral--neutral-darker\<deleted\|variable-230e7652-8ddd-224c-29e6-ce004680689a\>);
+  --sipgate-pattern-library-3346_color-semantics---forms--button-hover--secondary: var(--sipgate-pattern-library-3346_color-primitives---alpha--black-alpha-10);
+  --sipgate-pattern-library-3346---text-color--text-alternate\<deleted\|variable-4e2f89ce-8331-d013-7489-231f13cd2fe7\>: var(--sipgate-pattern-library-3346---base-color-neutral--white\<deleted\|variable-9a8b9a1d-0a40-3117-4583-55380c0ea330\>);
+  --sipgate-pattern-library-3346_sizes-styles---radius--radius-large: 1.5rem;
+  --sipgate-pattern-library-3346---border-color--border-primary\<deleted\|variable-cd12ce16-1ce5-1992-d76d-370f11b396db\>: var(--sipgate-pattern-library-3346---base-color-neutral--neutral-lightest\<deleted\|variable-68f278c1-4650-6fc5-5326-d8116cd4e085\>);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-primary: var(--sipgate-pattern-library-3346_color-primitives---neutral--white);
+  --sipgate-pattern-library-3346_color-semantics---border-color--border-primary: var(--sipgate-pattern-library-3346_color-primitives---neutral--neutral-150);
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-small: .875rem;
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-300: #cecece;
+  --sipgate-pattern-library-3346_sizes-font---h4--h4: 2rem;
+  --sipgate-pattern-library-3346_sizes-font---h4--h4-lineheight: 1.2em;
+  --sipgate-pattern-library-3346_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+  --sipgate-pattern-library-3346_sizes-font---h4--h4-serif: 1.92rem;
+  --sipgate-pattern-library-3346_sizes-font---font--secondary-light-weight: 300;
+  --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+  --sipgate-pattern-library-3346_sizes-font---h6--h6: 1.25rem;
+  --sipgate-pattern-library-3346_sizes-font---h6--h6-lineheight: 1.4em;
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-large: 1.25rem;
+  --sipgate-pattern-library-3346_sizes-font---h2--h2: 3.25rem;
+  --sipgate-pattern-library-3346_sizes-font---h2--h2-lineheigt: 1.15em;
+  --sipgate-pattern-library-3346_sizes-font---h2--h2-serif: 3.12rem;
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-medium: 1.125rem;
+  --sipgate-pattern-library-3346_sizes-styles---radius--radius-medium: 1rem;
+  --sipgate-pattern-library-3346_color-semantics---base-color-neutral--grey-95\<deleted\|variable-3bf840ed-7808-ef30-f178-9aa0967ca5d1\>: #efefef;
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-secondary: var(--sipgate-pattern-library-3346_color-primitives---neutral--neutral-100);
+  --sipgate-pattern-library-3346_color-primitives---brand-soft--clementine-soft: #ffeadc;
+  --sipgate-pattern-library-3346_color-primitives---brand-soft--lavender-soft: #f3f0ff;
+  --sipgate-pattern-library-3346_color-primitives---brand-soft--cornflower-soft: #edf2ff;
+  --sipgate-pattern-library-3346_color-primitives---brand-soft--mint-soft: #ebf5eb;
+  --sipgate-pattern-library-3346_color-primitives---brand-softest--electric-lime-softest: #faffe8;
+  --sipgate-pattern-library-3346_sizes-font---h5--h5: 1.5rem;
+  --sipgate-pattern-library-3346_sizes-font---h5--h5-lineheight: 1.4em;
+  --sipgate-pattern-library-3346_sizes-font---h5--h5-serif: 1.5rem;
+  --sipgate-pattern-library-3346_sizes-styles---radius--radius-small: .5rem;
+  --sipgate-pattern-library-3346---text-color--text-primary\<deleted\|variable-69ecffc7-e693-14f3-263d-895d100d6c3f\>: var(--sipgate-pattern-library-3346---base-color-neutral--black\<deleted\|variable-1e5e5bb1-beb6-627e-edfe-e6dd579e599e\>);
+  --sipgate-pattern-library-3346_sizes-font---h3--h3: 2.5rem;
+  --sipgate-pattern-library-3346_sizes-font---h3--h3-lineheight: 1.2em;
+  --sipgate-pattern-library-3346_sizes-font---h3--h3-serif: 2.4rem;
+  --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-serif: 4.8rem;
+  --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-lineheight: 5rem;
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-tiny: .75rem;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-150: #e5e7eb;
+  --sipgate-pattern-library-3346_color-primitives---brand--electric-lime: #deff00;
+  --sipgate-pattern-library-3346_color-primitives---brand--lavender: #e2d8ff;
+  --sipgate-pattern-library-3346_color-primitives---brand--cornflower: #aabcff;
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-mint-soft: var(--sipgate-pattern-library-3346_color-primitives---brand-soft--mint-soft);
+  --sipgate-pattern-library-3346---background-color--background-success\<deleted\|variable-6c0f2b18-e299-fba2-4ed1-4f9b9c1ba789\>: var(--sipgate-pattern-library-3346---base-color-system--success-green\<deleted\|variable-8c9f43f7-06d4-12c7-e93b-0637dfd46f47\>);
+  --sipgate-pattern-library-3346---text-color--text-success\<deleted\|variable-893069d7-40bf-0e83-8e69-5602ce938c1a\>: var(--sipgate-pattern-library-3346---base-color-system--success-green-dark\<deleted\|variable-21713ad4-8e0e-4073-f754-14124c957e18\>);
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-regular: 1rem;
+  --sipgate-pattern-library-3346_color-semantics---forms--form-text-color-placeholder: var(--sipgate-pattern-library-3346_color-primitives---neutral--neutral-300);
+  --sipgate-pattern-library-3346---text-color--text-secondary\<deleted\|variable-e16a916a-a9bd-7858-061d-16871226cdf3\>: var(--sipgate-pattern-library-3346---base-color-neutral--neutral-darker\<deleted\|variable-230e7652-8ddd-224c-29e6-ce004680689a\>);
+  --sipgate-pattern-library-3346---background-color--background-error\<deleted\|variable-1d648a5b-6c95-8f51-3990-11d64f80d6e9\>: var(--sipgate-pattern-library-3346---base-color-system--error-red\<deleted\|variable-e7cb3f86-c1fb-cc4a-0e19-e2f75b49a2d6\>);
+  --sipgate-pattern-library-3346---text-color--text-error\<deleted\|variable-92af2ef7-5e00-f769-d44c-7400409e636a\>: var(--sipgate-pattern-library-3346---base-color-system--error-red-dark\<deleted\|variable-aa4b63fc-315e-7b3c-2206-b8753e305ac8\>);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-cornflower: var(--sipgate-pattern-library-3346_color-primitives---brand--cornflower);
+  --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl: 5rem;
+  --sipgate-pattern-library-3346_sizes-styles---grid--grid-gap: 2rem;
+  --sipgate-pattern-library-3346---link-color--link-alternate\<deleted\|variable-1a872782-6f2c-24a6-3bd3-8e9d2e7ff68b\>: var(--sipgate-pattern-library-3346---base-color-neutral--white\<deleted\|variable-9a8b9a1d-0a40-3117-4583-55380c0ea330\>);
+  --sipgate-pattern-library-3346_color-semantics---link-color--link-legal: var(--sipgate-pattern-library-3346_color-primitives---neutral--neutral-500);
+  --sipgate-pattern-library-3346_color-semantics---text-color--text-secondary: var(--sipgate-pattern-library-3346_color-primitives---neutral--neutral-500);
+  --sipgate-pattern-library-3346_color-semantics---link-color--link-secondary: var(--sipgate-pattern-library-3346_color-primitives---neutral--black);
+  --sipgate-pattern-library-3346_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+  --sipgate-pattern-library-3346_color-primitives---neutral--black: #121212;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-100: #f8f8f8;
+  --sipgate-pattern-library-3346_color-primitives---neutral--white: white;
+  --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-xlarge: 1.5rem;
+  --sipgate-pattern-library-3346_sizes-font---h1--h1: 4rem;
+  --sipgate-pattern-library-3346_sizes-font---h1--h1-serif: 3.84rem;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-200: #e0e0e0;
+  --sipgate-pattern-library-3346_color-primitives---brand-soft--electric-lime-soft: #effdc1;
+  --sipgate-pattern-library-3346_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+  --sipgate-pattern-library-3346_sizes-font---font--primary-regular-weight: 400;
+  --sipgate-pattern-library-3346_color-semantics---border-color--border-secondary: var(--sipgate-pattern-library-3346_color-primitives---neutral--neutral-500);
+  --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large: 2rem;
+  --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-lavender: var(--sipgate-pattern-library-3346_color-primitives---brand--lavender);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-mint: var(--sipgate-pattern-library-3346_color-primitives---brand--mint);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-cornflower-soft: var(--sipgate-pattern-library-3346_color-primitives---brand-soft--cornflower-soft);
+  --sipgate-pattern-library-3346_color-primitives---brand-softest--cornflower-softest: #f7f9ff;
+  --font--primary-regular: "PX Grotesk", sans-serif;
+  --base-color-neutral--grey-10: #1a1a1a;
+  --font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+  --text-color--text-primary: var(--base-color-neutral--black);
+  --_neo-font-sizes---h1--h1: 4rem;
+  --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+  --font--primary-bold-weight: 700;
+  --_neo-font-sizes---h2--h2: 3.25rem;
+  --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+  --_neo-font-sizes---h3--h3: 2.5rem;
+  --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+  --color-neutral--black\<deleted\|variable-e3c211ec-6282-ee6d-d7c3-1698cd9d4e53\>: #121212;
+  --core--line-height-default\<deleted\|variable-d94b56a4-9493-59a7-cf23-34eb8aec3a2a\>: 26px;
+  --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+  --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+  --font--primary-regular-weight: 400;
+  --link-color--link-primary: var(--base-color-brand-alternate--electric-cornflower);
+  --text-color--text-primary\<deleted\|relume-variable-text-color-1\>: var(--base-color-neutral--black);
+  --spacing--spacing-40\<deleted\|variable-7a3c8116-528d-0e52-2320-3b1ccf8120fb\>: 2.5rem;
+  --spacing--spacing-14\<deleted\|variable-341e397a-44f0-8d08-beec-d89b346a064d\>: .875rem;
+  --radius--radius-medium: 1.5rem;
+  --_neo-font-sizes---text-sizes--medium: 1.125rem;
+  --_neo-font-sizes---h5--h5: 1.5rem;
+  --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+  --base-color-neutral--black: #121212;
+  --radius--radius-round: 1000px;
+  --base-color-neutral--white: white;
+  --base-color-brand--electric-lime: #deff00;
+  --base-color-neutral--neutral-lightest: #e5e7eb;
+  --background-color--background-primary: var(--base-color-neutral--white);
+  --base-color-neutral--white\<deleted\|relume-variable-color-neutral-2\>: white;
+  --button-secondary-alternate-hover: #ffffff26;
+  --core--line-height-small: 19.5px;
+  --_color-primitives---brand--electric-lavender: #8642fe;
+  --sipgate-pattern-library-3346_color-primitives---brand--electric-lavender: #8642fe;
+  --base-color-brand-darkest--lavender-darkest: #38235f;
+  --base-color-brand-alternate--electric-cornflower: #274ff0;
+  --base-color-neutral--neutral-darker: #222;
+  --font--secondary-light: Tiempos, "Times New Roman", sans-serif;
+  --radius--radius-small: .5rem;
+  --forms--form-font-colour-placeholder: var(--base-color-neutral--neutral-light);
+  --core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>: 18px;
+  --_neo-font-sizes---h4--h4: 2rem;
+  --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+  --_neo-font-sizes---h6--h6: 1.25rem;
+  --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+  --_neo-font-sizes---text-sizes--small: .875rem;
+  --background-color--background-error\<deleted\|relume-variable-background-color-8\>: var(--base-color-system--error-red-light\<deleted\|relume-variable-system-color-6\>);
+  --text-color--text-error\<deleted\|relume-variable-text-color-5\>: var(--base-color-system--error-red\<deleted\|relume-variable-system-color-5\>);
+  --base-color-brand-soft--cornflower-soft: #edf2ff;
+  --core--section-default\<deleted\|variable-d77d4ab7-3c90-41c0-4a8a-221990493428\>: 78px;
+  --base-color-neutral--grey-97: #f8f8f8;
+  --color-brand--blue: #1086fc;
+  --base-color-brand--mint: #d1e6d1;
+  --border-color--border-primary: var(--base-color-neutral--neutral-lightest);
+  --base-color-brand-soft--mint-soft: #ebf5eb;
+  --core--section-default-320\<deleted\|variable-9904215d-5955-4153-a385-6f2d1e82d0a9\>: var(--core--section-default\<deleted\|variable-d77d4ab7-3c90-41c0-4a8a-221990493428\>);
+  --_neo-font-sizes---h3--h3-serif: 2.4rem;
+  --font--secondary-light-weight: 300;
+  --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+  --text-color--text-alternate: var(--base-color-neutral--white);
+  --text-color--text-secondary: var(--base-color-neutral--grey-50);
+  --background-color--background-secondary: var(--sipgate-pattern-library-3346_color-semantics---background-color--background-secondary);
+  --_neo-font-sizes---text-sizes--large: 1.25rem;
+  --radius--radius-default: 1rem;
+  --_neo-font-sizes---h1--h1-serif: 3.84rem;
+  --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+  --_neo-font-sizes---h4--h4-serif: 1.92rem;
+  --_neo-font-sizes---text-sizes--tiny: .75rem;
+  --_color-primitives---neutral--white: white;
+  --base-color-neutral--neutral-light: #aaa;
+  --base-color-system--success-green: #00bd82;
+  --color-neutral--white\<deleted\|variable-c7ca506a-f808-16bb-26b3-19ee2291e514\>: white;
+  --_neo-font-sizes---h2--h2-serif: 3.12rem;
+  --color-brand--grey-51\<deleted\|variable-329f9b61-9abf-ebb8-f7ca-bc9d49fff301\>: #838383;
+  --core--font-xsmall\<deleted\|variable-75b635a0-ac9e-3ab0-fd9e-95b3010500b0\>: 13.5px;
+  --_sizes-font---text-sizes--text-size-small: .875rem;
+  --base-color-brand--cornflower: #aabcff;
+  --border-color--border-primary\<deleted\|relume-variable-border-color-1\>: black;
+  --base-color-brand-soft--electric-lime-soft: #effdc1;
+  --color-brand--grey-40\<deleted\|variable-0f59f7d3-ea19-e9a9-76b5-2a92c86742ba\>: #666;
+  --color-brand--grey-63\<deleted\|variable-4c6f9d5f-47c1-1cf3-c381-8d84297fa671\>: #a1a1a1;
+  --color-brand--grey-24\<deleted\|variable-d7252fbc-9411-770d-831f-61d379d55768\>: #3c3c3c;
+  --base-color-brand--clementine: #ff7200;
+  --base-color-neutral--neutral-lighter: #ccc;
+  --base-color-brand--lavender: #e2d8ff;
+  --neopbx--font-size-small\<deleted\|variable-c84166b9-b57c-ff38-5605-58e0d316e66f\>: 12px;
+  --neopbx--line-height-small\<deleted\|variable-3d622292-d2be-9e9f-5321-2b838aee1eca\>: 16px;
+  --font--icon-font: "Sipgate Icons", sans-serif;
+  --neopbx--default-font-size\<deleted\|variable-0d061c82-3b34-fd6f-a441-fd8a0af7d1fc\>: 16px;
+  --neopbx--default-line-height\<deleted\|variable-568f82e3-fe5b-bf15-aa2d-82aae75fbe39\>: 24px;
+  --neopbx--font-size-medium\<deleted\|variable-1c983a0b-a83e-361c-9a23-e8f78e590956\>: 14px;
+  --neopbx--line-height-medium\<deleted\|variable-1fe84c1b-983c-9f49-df3e-f26714d98c22\>: 20px;
+  --color-brand--grey-100\<deleted\|variable-0bcf566a-f7d9-66fc-ce8e-5e48391d975f\>: #e3e3e3;
+  --border--border-main: 1px;
+  --_color-primitives---neutral--black: #121212;
+  --base-color-neutral--grey-95: #efefef;
+  --base-color-system--error-red: #ff5e5e;
+  --color-brand--blue-25\<deleted\|variable-4190e03e-496f-c25f-2e96-c51f7bcb85ae\>: #f5faff;
+  --background-color--background-grey\<deleted\|variable-385dd619-c8f6-cc4d-b018-f852e10409d1\>: var(--base-color-neutral--grey-97);
+  --text-color--text-error: var(--base-color-system--error-red);
+  --base-color-neutral--neutral-lightest\<deleted\|relume-variable-color-neutral-3\>: #eee;
+  --light-grey-archive\<deleted\|variable-150a737e\>: #f4f4f4;
+  --_neo-style-sizes---grid-3-column-gap: 2rem;
+  --_neo-style-sizes---grip-row-gap: 2rem;
+  --_neo-font-sizes---text-sizes--xlarge: 1.5rem;
+  --base-color-brand--mint-dark: #006660;
+  --base-color-neutral--grey-50: grey;
+  --_neo-font-sizes---h5--h5-serif: 1.44rem;
+  --sipgate-pattern-library-3346---white\<deleted\|variable-a4db2f35-fe46-d834-aece-01cefe8c6019\>: white;
+  --base-color-neutral--greige-90: #f2efed;
+  --border-color--border-minimal: var(--base-color-neutral--grey-97);
+  --_neo-font-sizes---other-font-styles--quote-large: 2rem;
+  --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+  --base-color-neutral--neutral-dark: #444;
+  --background-color--background-alternate: var(--base-color-neutral--grey-10);
+  --base-color-brand-softest--lavender-softest: #faf8ff;
+  --_neo-font-sizes---other-font-styles--headline-xxl: 6.5rem;
+  --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 6.5rem;
+  --_neo-font-sizes---other-font-styles--headline-xxl-serif: 6.24rem;
+  --_neo-font-sizes---other-font-styles--headline-xl: 5rem;
+  --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 5rem;
+  --_neo-font-sizes---other-font-styles--headline-xl-serif: 4.8rem;
+  --_neo-font-sizes---other-font-styles--cta_product-h2: 3.25rem;
+  --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+  --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 3.12rem;
+  --base-color-brand-soft--lavender-soft: #f3f0ff;
+  --base-color-brand-alternate--electric-lavender: #8642fe;
+  --background-color--background-tertiary: var(--base-color-neutral--neutral);
+  --base-color-neutral--neutral-darkest: #1a1a1a;
+  --base-color-brand-softest--cornflower-softest: #f7f9ff;
+  --base-color-neutral--neutral: #666;
+  --black-archive\<deleted\|variable-dccb7db6\>: black;
+  --base-color-brand-soft--clementine-soft: #ffeadc;
+  --_color-primitives---brand--electric-lime: #deff00;
+  --sipgate-pattern-library-3346_color-primitives---brand--clementine: #ff7200;
+  --_sizes-styles---radius--radius-small: .5rem;
+  --_sizes-styles---radius--radius-medium: 1rem;
+  --_sizes-styles---radius--radius-large: 1.5rem;
+  --_sizes-font---font--secondary-light-weight: 300;
+  --_color-semantics---background-color--background-electric-lime: var(--_color-primitives---brand--electric-lime);
+  --_color-primitives---brand--lavender: #e2d8ff;
+  --_color-semantics---background-color--background-clementine: var(--_color-primitives---brand--clementine);
+  --_sizes-styles---radius--radius-round: 50rem;
+  --_finsweet-default---background-color--background-warning: var(--_finsweet-default---base-color-system--warning-yellow);
+  --_color-semantics---border-color--border-error: var(--_color-primitives---functional--error-red);
+  --_sizes-font---h1--h1-lineheight: 1.1em;
+  --_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+  --_sizes-styles---border--border-default: 1px;
+  --_color-semantics---text-color--text-primary: var(--_color-primitives---neutral--black);
+  --_finsweet-default---base-color-system--warning-yellow-dark: #5e5515;
+  --_color-semantics---border-color--border-primary: var(--_color-primitives---neutral--neutral-150);
+  --_color-semantics---border-color--border-alternate: var(--_color-primitives---neutral--white);
+  --_finsweet-default---background-color--background-label-classes: var(--_finsweet-default---base-color-system--blue);
+  --_color-semantics---text-color--text-success: var(--_color-primitives---functional--success-green);
+  --_sizes-font---headline-xxl--headline-xxl-lineheigt: 6.5rem;
+  --_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+  --_sizes-font---h5--h5: 1.5rem;
+  --_sizes-font---h3--h3: 2.5rem;
+  --_finsweet-default---background-color--background-label-component: var(--_finsweet-default---base-color-system--green);
+  --_finsweet-default---base-color-system--green: #03a559;
+  --_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+  --_color-semantics---link-color--link-alternate: var(--_color-primitives---neutral--white);
+  --_sizes-font---h2--h2-serif: 3.12rem;
+  --_color-semantics---text-color--text-alternate: var(--_color-primitives---neutral--white);
+  --_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+  --_color-semantics---link-color--link-primary: var(--_color-primitives---brand--electric-cornflower);
+  --_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+  --_sizes-font---text-sizes--text-size-regular: 1rem;
+  --_sizes-font---headline-xl--headline-xl-serif: 4.8rem;
+  --_sizes-font---h1--h1-serif: 3.84rem;
+  --_color-semantics---border-color--border-secondary: var(--_color-primitives---neutral--neutral-500);
+  --_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+  --_finsweet-default---background-color--background-label-core: var(--_finsweet-default---base-color-system--pink);
+  --_sizes-font---text-sizes--text-size-large: 1.25rem;
+  --_color-semantics---forms--form-text-color-placeholder: var(--_color-primitives---neutral--neutral-300);
+  --_sizes-font---headline-xxl--headline-xxl-serif: 6.24rem;
+  --_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+  --_sizes-font---h2--h2: 3.25rem;
+  --_sizes-font---h6--h6-serif: 1.4rem;
+  --_sizes-font---h5--h5-lineheight: 1.4em;
+  --_finsweet-default---text-color--text-warning: var(--_finsweet-default---base-color-system--warning-yellow-dark);
+  --_color-semantics---text-color--text-error: var(--_color-primitives---functional--error-red);
+  --_sizes-font---h6--h6: 1.25rem;
+  --_sizes-font---font--primary-regular-weight: 400;
+  --_sizes-font---other-font-styles--quote-large: 2rem;
+  --_sizes-font---text-sizes--text-size-tiny: .75rem;
+  --_sizes-font---headline-xl--headline-xl: 5rem;
+  --_finsweet-default---background-color--background-primary: var(--_finsweet-default---base-color-neutral--black\<deleted\|variable-04f93408-8b4f-9a3f-963a-dc9979ac029b\>);
+  --_sizes-font---text-sizes--text-size-xlarge: 1.5rem;
+  --_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+  --_sizes-font---h3--h3-serif: 2.4rem;
+  --_finsweet-default---link-color--link-primary: var(--_finsweet-default---base-color-system--blue);
+  --_finsweet-default---base-color-system--warning-yellow: #fcf8d8;
+  --_color-semantics---background-color--background-secondary: var(--_color-primitives---neutral--neutral-100);
+  --_sizes-font---h2--h2-lineheigt: 1.15em;
+  --_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+  --_sizes-font---headline-xl--headline-xl-lineheight: 5rem;
+  --_finsweet-default---base-color-system--pink: #dd23bb;
+  --_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+  --_sizes-styles---grid--grid-gap: 2rem;
+  --_color-semantics---background-color--background-alternate: var(--_color-primitives---neutral--black);
+  --_sizes-font---h4--h4-serif: 1.92rem;
+  --_sizes-font---text-sizes--text-size-medium: 1.125rem;
+  --_sizes-font---h4--h4: 2rem;
+  --_color-semantics---border-color--border-success: var(--_color-primitives---functional--success-green);
+  --_finsweet-default---base-color-system--blue: #2d62ff;
+  --_color-semantics---background-color--background-primary: var(--_color-primitives---neutral--white);
+  --_sizes-font---h1--h1: 4rem;
+  --_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em;
+  --_sizes-font---h6--h6-lineheight: 1.4em;
+  --_sizes-font---font--primary-bold-weight: 700;
+  --_sizes-font---h3--h3-lineheight: 1.2em;
+  --_color-semantics---link-color--link-secondary: var(--_color-primitives---neutral--black);
+  --_sizes-font---h4--h4-lineheight: 1.2em;
+  --_color-semantics---text-color--text-secondary: var(--_color-primitives---neutral--neutral-500);
+  --_sizes-font---headline-xxl--headline-xxl: 6.5rem;
+  --_color-primitives---brand--clementine: #ff7200;
+  --_color-primitives---brand--cornflower: #aabcff;
+  --_color-primitives---brand--mint: #d1e6d1;
+  --_color-primitives---brand--electric-cornflower: #274ff0;
+  --_color-primitives---brand-soft--electric-lime-soft: #effdc1;
+  --_color-primitives---brand-soft--clementine-soft: #ffeadc;
+  --_color-primitives---brand-soft--cornflower-soft: #edf2ff;
+  --_color-primitives---brand-soft--mint-soft: #ebf5eb;
+  --_color-primitives---brand-soft--lavender-soft: #f3f0ff;
+  --_color-primitives---brand-softest--electric-lime-softest: #faffe8;
+  --_color-primitives---brand-softest--clementine-softest: #fff8f3;
+  --_color-primitives---brand-softest--cornflower-softest: #f7f9ff;
+  --_color-primitives---brand-softest--mint-softest: #f6faf6;
+  --_color-primitives---brand-softest--lavender-softest: #faf8ff;
+  --_color-primitives---brand-dark--electric-lime-dark: #38410e;
+  --_color-primitives---brand-dark--electric-cornflower-dark: #132b81;
+  --_color-primitives---brand-dark--electric-lavender-dark: #322372;
+  --_color-primitives---brand-dark--mint-dark: #006660;
+  --_color-primitives---brand-darkest--electric-lavender-darkest: #38235f;
+  --_color-primitives---neutral--neutral-100: #f8f8f8;
+  --_color-primitives---neutral--neutral-200: #e0e0e0;
+  --_color-primitives---neutral--neutral-300: #cecece;
+  --_color-primitives---neutral--neutral-500: #8d8d8d;
+  --_color-primitives---neutral--neutral-600: #646464;
+  --_color-primitives---neutral--neutral-800: #202020;
+  --_color-primitives---functional--success-green: #00bd82;
+  --_color-primitives---functional--success-green-soft: #e1f8ec;
+  --_color-primitives---functional--error-red: #ff5e5e;
+  --_color-primitives---functional--error-red-soft: #ffebe9;
+  --_color-primitives---neutral--neutral-900: #1a1a1a;
+  --_color-semantics---link-color--link-legal: var(--_color-primitives---neutral--neutral-500);
+  --_color-primitives---neutral--neutral-150: #e5e7eb;
+  --_color-semantics---background-color--background-electric-cornflower: var(--_color-primitives---brand--electric-cornflower);
+  --_color-semantics---background-color--background-cornflower: var(--_color-primitives---brand--cornflower);
+  --_color-semantics---background-color--background-mint: var(--_color-primitives---brand--mint);
+  --_color-semantics---background-color--background-lavender: var(--_color-primitives---brand--lavender);
+  --_color-semantics---background-color--background-electric-lime-soft: var(--_color-primitives---brand-soft--electric-lime-soft);
+  --_color-semantics---background-color--background-lavender-soft: var(--_color-primitives---brand-soft--lavender-soft);
+  --_color-semantics---background-color--background-cornflower-soft: var(--_color-primitives---brand-soft--cornflower-soft);
+  --_color-semantics---background-color--background-clementine-soft: var(--_color-primitives---brand-soft--clementine-soft);
+  --_color-semantics---background-color--background-mint-soft: var(--_color-primitives---brand-soft--mint-soft);
+  --_color-semantics---background-color--background-mint-softest: var(--_color-primitives---brand-softest--mint-softest);
+  --_color-semantics---background-color--background-clementine-softest: var(--_color-primitives---brand-softest--clementine-softest);
+  --_color-semantics---background-color--background-cornflower-softest: var(--_color-primitives---brand-softest--cornflower-softest);
+  --_color-semantics---background-color--background-lavender-softest: var(--_color-primitives---brand-softest--lavender-softest);
+  --_color-semantics---background-color--background-electric-lavender: var(--_color-primitives---brand--electric-lavender);
+  --_color-primitives---alpha--white-alpha-15: #ffffff26;
+  --_color-primitives---alpha--black-alpha-10: #0c0c0c1a;
+  --_color-semantics---forms--button-hover--secondary-alternate: var(--_color-primitives---alpha--white-alpha-15);
+  --_color-semantics---forms--button-hover--secondary: var(--_color-primitives---alpha--black-alpha-10);
+  --sipgate-pattern-library-3346---background-color--background-label-component: var(--sipgate-pattern-library-3346---base-color-system--green);
+  --sipgate-pattern-library-3346_color-primitives---brand--mint: #d1e6d1;
+  --sipgate-pattern-library-3346_color-primitives---brand--electric-cornflower: #274ff0;
+  --base-color-brand-softest--mint-softest: #f6faf6;
+  --base-color-brand-darkest--frontdesk-dark: white;
+  --sipgate-pattern-library-3346_color-primitives---brand-softest--clementine-softest: #fff8f3;
+  --sipgate-pattern-library-3346_color-primitives---brand-softest--mint-softest: #f6faf6;
+  --sipgate-pattern-library-3346_color-primitives---brand-softest--lavender-softest: #faf8ff;
+  --sipgate-pattern-library-3346_color-primitives---brand-dark--electric-lime-dark: #38410e;
+  --sipgate-pattern-library-3346_color-primitives---brand-dark--electric-cornflower-dark: #132b81;
+  --sipgate-pattern-library-3346_color-primitives---brand-dark--electric-lavender-dark: #322372;
+  --sipgate-pattern-library-3346_color-primitives---brand-dark--mint-dark: #006660;
+  --sipgate-pattern-library-3346_color-primitives---brand-darkest--electric-lavender-darkest: #38235f;
+  --base-color-system--success-green-light: #e1f8ec;
+  --base-color-system--error-red-light: #ffebe9;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-500: #8d8d8d;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-600: #646464;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-800: #202020;
+  --sipgate-pattern-library-3346_color-primitives---neutral--neutral-900: #1a1a1a;
+  --sipgate-pattern-library-3346_color-primitives---functional--success-green: #00bd82;
+  --sipgate-pattern-library-3346_color-primitives---functional--success-green-soft: #e1f8ec;
+  --sipgate-pattern-library-3346_color-primitives---functional--error-red: #ff5e5e;
+  --sipgate-pattern-library-3346_color-primitives---functional--error-red-soft: #ffebe9;
+  --sipgate-pattern-library-3346_color-primitives---alpha--white-alpha-15: #ffffff26;
+  --sipgate-pattern-library-3346_color-primitives---alpha--black-alpha-10: #0c0c0c1a;
+  --sipgate-pattern-library-3346---base-color-system--green: #03a559;
+  --sipgate-pattern-library-3346---base-color-system--blue: #2d62ff;
+  --sipgate-pattern-library-3346---base-color-system--pink: #dd23bb;
+  --sipgate-pattern-library-3346---base-color-system--warning-yellow: #fcf8d8;
+  --sipgate-pattern-library-3346---base-color-system--warning-yellow-dark: #5e5515;
+  --sipgate-pattern-library-3346---background-color--background-primary: var(--sipgate-pattern-library-3346---base-color-neutral--black\<deleted\|variable-1e5e5bb1-beb6-627e-edfe-e6dd579e599e\>);
+  --sipgate-pattern-library-3346---background-color--background-label-classes: var(--sipgate-pattern-library-3346---base-color-system--blue);
+  --sipgate-pattern-library-3346---background-color--background-label-core: var(--sipgate-pattern-library-3346---base-color-system--pink);
+  --sipgate-pattern-library-3346---background-color--background-warning: var(--sipgate-pattern-library-3346---base-color-system--warning-yellow);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-electric-cornflower: var(--sipgate-pattern-library-3346_color-primitives---brand--electric-cornflower);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-electric-lavender: var(--sipgate-pattern-library-3346_color-primitives---brand--electric-lavender);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-clementine: var(--sipgate-pattern-library-3346_color-primitives---brand--clementine);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-electric-lime-soft: var(--sipgate-pattern-library-3346_color-primitives---brand-soft--electric-lime-soft);
+  --link-color--link-secondary: var(--base-color-neutral--grey-50);
+  --link-color--link-alternate: var(--base-color-neutral--white);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-lavender-soft: var(--sipgate-pattern-library-3346_color-primitives---brand-soft--lavender-soft);
+  --accent-color--accent: var(--base-color-brand-alternate--electric-cornflower);
+  --accent-color--ai: var(--base-color-brand-alternate--electric-lavender);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-clementine-soft: var(--sipgate-pattern-library-3346_color-primitives---brand-soft--clementine-soft);
+  --border-color--border-secondary: var(--base-color-neutral--grey-50);
+  --border-color--border-alternate: var(--base-color-neutral--white);
+  --border-color--border-success: var(--base-color-system--success-green);
+  --border-color--border-error: var(--base-color-system--error-red);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-lavender-softest: var(--sipgate-pattern-library-3346_color-primitives---brand-softest--lavender-softest);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-cornflower-softest: var(--sipgate-pattern-library-3346_color-primitives---brand-softest--cornflower-softest);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-clementine-softest: var(--sipgate-pattern-library-3346_color-primitives---brand-softest--clementine-softest);
+  --sipgate-pattern-library-3346_color-semantics---background-color--background-mint-softest: var(--sipgate-pattern-library-3346_color-primitives---brand-softest--mint-softest);
+  --sipgate-pattern-library-3346---text-color--text-warning: var(--sipgate-pattern-library-3346---base-color-system--warning-yellow-dark);
+  --sipgate-pattern-library-3346_color-semantics---text-color--text-success: var(--sipgate-pattern-library-3346_color-primitives---functional--success-green);
+  --sipgate-pattern-library-3346_color-semantics---text-color--text-error: var(--sipgate-pattern-library-3346_color-primitives---functional--error-red);
+  --sipgate-pattern-library-3346---link-color--link-primary: var(--sipgate-pattern-library-3346---base-color-system--blue);
+  --sipgate-pattern-library-3346_color-semantics---link-color--link-primary: var(--sipgate-pattern-library-3346_color-primitives---brand--electric-cornflower);
+  --sipgate-pattern-library-3346_color-semantics---border-color--border-alternate: var(--sipgate-pattern-library-3346_color-primitives---neutral--white);
+  --sipgate-pattern-library-3346_color-semantics---border-color--border-success: var(--sipgate-pattern-library-3346_color-primitives---functional--success-green);
+  --sipgate-pattern-library-3346_color-semantics---border-color--border-error: var(--sipgate-pattern-library-3346_color-primitives---functional--error-red);
+  --sipgate-pattern-library-3346_color-semantics---link-color--link-alternate: var(--sipgate-pattern-library-3346_color-primitives---neutral--white);
+  --text-color--text-success: var(--base-color-system--success-green);
+  --accent-color--test-library: white;
+  --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+  --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl: 6.5rem;
+  --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-serif: 6.24rem;
+  --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-lineheigt: 6.5rem;
+  --sipgate-pattern-library-3346_color-semantics---forms--button-hover--secondary-alternate: var(--sipgate-pattern-library-3346_color-primitives---alpha--white-alpha-15);
+  --sipgate-pattern-library-3346_sizes-font---h1--h1-lineheight: 1.1em;
+  --sipgate-pattern-library-3346_sizes-font---h6--h6-serif: 1.4rem;
+  --_sizes-font---h5--h5-serif: 1.44rem;
+  --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+  --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+  --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em;
+  --sipgate-pattern-library-3346---base-color-neutral--neutral-darker\<deleted\|variable-230e7652-8ddd-224c-29e6-ce004680689a\>: #222;
+  --sipgate-pattern-library-3346---base-color-neutral--white\<deleted\|variable-9a8b9a1d-0a40-3117-4583-55380c0ea330\>: #fff;
+  --sipgate-pattern-library-3346---base-color-neutral--neutral-lightest\<deleted\|variable-68f278c1-4650-6fc5-5326-d8116cd4e085\>: #eee;
+  --sipgate-pattern-library-3346---base-color-neutral--black\<deleted\|variable-1e5e5bb1-beb6-627e-edfe-e6dd579e599e\>: #000;
+  --sipgate-pattern-library-3346---base-color-system--success-green\<deleted\|variable-8c9f43f7-06d4-12c7-e93b-0637dfd46f47\>: #cef5ca;
+  --sipgate-pattern-library-3346---base-color-system--success-green-dark\<deleted\|variable-21713ad4-8e0e-4073-f754-14124c957e18\>: #114e0b;
+  --sipgate-pattern-library-3346---base-color-system--error-red\<deleted\|variable-e7cb3f86-c1fb-cc4a-0e19-e2f75b49a2d6\>: #f8e4e4;
+  --sipgate-pattern-library-3346---base-color-system--error-red-dark\<deleted\|variable-aa4b63fc-315e-7b3c-2206-b8753e305ac8\>: #3b0b0b;
+  --base-color-system--error-red-light\<deleted\|relume-variable-system-color-6\>: #fef3f2;
+  --base-color-system--error-red\<deleted\|relume-variable-system-color-5\>: #b42318;
+  --_finsweet-default---base-color-neutral--black\<deleted\|variable-04f93408-8b4f-9a3f-963a-dc9979ac029b\>: #000
+}
+
+.w-layout-grid {
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid
+}
+
+body {
+  font-family: var(--font--primary-regular);
+  color: var(--base-color-neutral--grey-10);
+  font-size: 1rem;
+  line-height: 1.5
+}
+
+h1 {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h1--h1);
+  line-height: var(--_neo-font-sizes---h1--h1-lineheight);
+  font-weight: var(--font--primary-bold-weight);
+  letter-spacing: -.085rem;
+  margin-top: 0;
+  margin-bottom: 0
+}
+
+h2 {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h2--h2);
+  line-height: var(--_neo-font-sizes---h2--h2-lineheigt);
+  font-weight: var(--font--primary-bold-weight);
+  letter-spacing: 0;
+  margin-top: 0;
+  margin-bottom: 0
+}
+
+h4 {
+  font-family: var(--font--primary-bold);
+  color: var(--color-neutral--black\<deleted\|variable-e3c211ec-6282-ee6d-d7c3-1698cd9d4e53\>);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 24.38px;
+  font-weight: 700;
+  line-height: 29.255px
+}
+
+p {
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---text-sizes--regular-paragraph);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-regular-weight);
+  -webkit-text-stroke-color: var(--color-neutral--black\<deleted\|variable-e3c211ec-6282-ee6d-d7c3-1698cd9d4e53\>);
+  margin-bottom: 0
+}
+
+a {
+  color: var(--link-color--link-primary);
+  vertical-align: baseline;
+  text-decoration: underline;
+  display: inline
+}
+
+ul {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.25rem
+}
+
+li {
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---text-sizes--regular-paragraph);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-regular-weight);
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+  padding-left: .5rem
+}
+
+img {
+  min-width: auto;
+  max-width: 100%;
+  display: inline-block
+}
+
+strong {
+  font-weight: 700
+}
+
+.heading-style-h5 {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h5--h5);
+  line-height: var(--_neo-font-sizes---h5--h5-lineheight);
+  font-weight: var(--font--primary-bold-weight);
+  letter-spacing: 0;
+  flex: 1
+}
+
+.button {
+  border: 1.5px solid var(--base-color-neutral--black);
+  border-radius: var(--radius--radius-round);
+  background-color: var(--base-color-neutral--black);
+  font-family: var(--font--primary-regular);
+  color: var(--base-color-neutral--white);
+  font-size: var(--_neo-font-sizes---text-sizes--regular-paragraph);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-regular-weight);
+  text-align: center;
+  letter-spacing: .03125rem;
+  text-transform: none;
+  flex: 0 auto;
+  padding: .8125rem 1.625rem;
+  text-decoration: none;
+  transition: none;
+  display: block;
+  position: static
+}
+
+.button:hover {
+  border-color: var(--base-color-brand--electric-lime);
+  background-color: var(--base-color-brand--electric-lime);
+  box-shadow: none;
+  color: var(--text-color--text-primary);
+  transform: none
+}
+
+.button.is-secondary {
+  color: #000;
+  text-shadow: none;
+  background-color: #0000;
+  border-width: 1.5px;
+  margin-left: 0;
+  display: block
+}
+
+.button.is-secondary:hover {
+  border-color: var(--text-color--text-primary);
+  background-color: var(--base-color-neutral--neutral-lightest)
+}
+
+.button.is-secondary.is-neutral:hover {
+  color: var(--base-color-neutral--black);
+  background-color: #fff3
+}
+
+.button.is-neutral:hover {
+  border-color: var(--base-color-neutral--neutral-darker);
+  background-color: var(--base-color-neutral--neutral-darker);
+  color: var(--base-color-neutral--white)
+}
+
+.button-group {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  text-align: left;
+  object-fit: fill;
+  flex-flow: wrap;
+  place-content: stretch flex-start;
+  align-items: flex-end;
+  display: flex
+}
+
+.text-align-center {
+  text-align: center;
+  width: 100%
+}
+
+.padding-section-large {
+  padding-top: 7rem;
+  padding-bottom: 7rem
+}
+
+.padding-section-large.is-first {
+  padding-top: 5rem;
+  padding-bottom: 5rem
+}
+
+.header1_content {
+  grid-column-gap: 3rem;
+  grid-row-gap: 3rem;
+  grid-template-rows: auto;
+  grid-template-columns: .9fr 1.1fr;
+  padding-top: 0;
+  padding-left: 0;
+  position: relative
+}
+
+.header1_image-wrapper {
+  aspect-ratio: auto;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  display: flex
+}
+
+.header1_component {
+  grid-column-gap: 26px;
+  grid-row-gap: 26px;
+  flex: 1;
+  grid-template-rows: auto;
+  grid-template-columns: minmax(0, 50%) minmax(0, 50%);
+  grid-auto-columns: 1fr;
+  place-content: center;
+  place-items: center;
+  padding-left: 0;
+  padding-right: 0;
+  display: block
+}
+
+.text-size-medium {
+  font-size: var(--_neo-font-sizes---text-sizes--medium);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-regular-weight)
+}
+
+.text-size-medium.text-weight-bold {
+  font-family: var(--font--primary-bold);
+  font-size: var(--core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>);
+  font-weight: 700
+}
+
+.text-size-medium.text-weight-bold {
+  font-size: var(--core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>);
+  font-weight: 700;
+  font-size: var(--core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>);
+  font-weight: 700;
+  font-size: var(--core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>);
+  font-weight: 700;
+  font-size: var(--core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>);
+  font-weight: 700
+}
+
+.text-size-medium.text-weight-bold {
+  font-size: var(--core--font-default\<deleted\|variable-498e916d-02df-89f2-1eb9-c966156f76e6\>);
+  font-weight: 700
+}
+
+.heading-style-h3 {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h3--h3);
+  line-height: var(--_neo-font-sizes---h3--h3-lineheight);
+  font-weight: var(--font--primary-bold-weight)
+}
+
+.heading-style-h3.is-serif {
+  font-family: var(--font--secondary-light);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h3--h3-serif);
+  font-weight: var(--font--secondary-light-weight);
+  letter-spacing: var(--_neo-font-sizes---serif-global-sizes--serif-letterspacing)
+}
+
+.text-weight-bold {
+  font-family: var(--font--primary-bold);
+  font-weight: var(--font--primary-bold-weight)
+}
+
+.spacer-medium {
+  width: 100%;
+  padding-top: 2rem;
+  display: block
+}
+
+.text-size-large {
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---text-sizes--large);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-regular-weight)
+}
+
+.container-large {
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1312px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible
+}
+
+.spacer-small {
+  width: 100%;
+  padding-top: 1.5rem
+}
+
+.heading-style-h1 {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h1--h1);
+  line-height: var(--_neo-font-sizes---h1--h1-lineheight);
+  font-weight: var(--font--primary-bold-weight);
+  letter-spacing: 0
+}
+
+.heading-style-h1.is-serif {
+  font-family: var(--font--secondary-light);
+  font-size: var(--_neo-font-sizes---h1--h1-serif);
+  font-weight: var(--font--secondary-light-weight);
+  letter-spacing: var(--_neo-font-sizes---serif-global-sizes--serif-letterspacing)
+}
+
+.padding-section-medium {
+  padding-top: 5rem;
+  padding-bottom: 5rem
+}
+
+.icon-embed-medium {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 39px;
+  height: 39px;
+  display: flex
+}
+
+.spacer-large {
+  width: 100%;
+  padding-top: 3rem
+}
+
+.spacer-xxsmall {
+  width: 100%;
+  padding-top: .5rem
+}
+
+.spacer-xsmall {
+  width: 100%;
+  padding-top: 1rem
+}
+
+.icon-embed-small {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  position: static
+}
+
+.align-center {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.heading-style-h2 {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---h2--h2);
+  line-height: var(--_neo-font-sizes---h2--h2-lineheigt);
+  font-weight: var(--font--secondary-light-weight);
+  --_neo-font-sizes---h1--h1: 4rem;
+  --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+  --_neo-font-sizes---h2--h2: 3.25rem;
+  --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+  --_neo-font-sizes---h3--h3: 2.5rem;
+  --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+  --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+  --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+  --_neo-font-sizes---text-sizes--medium: 1.125rem;
+  --_neo-font-sizes---h5--h5: 1.5rem;
+  --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+  --_neo-font-sizes---h4--h4: 2rem;
+  --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+  --_neo-font-sizes---h6--h6: 1.25rem;
+  --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+  --_neo-font-sizes---text-sizes--small: .875rem;
+  --_neo-font-sizes---h3--h3-serif: 2.4rem;
+  --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+  --_neo-font-sizes---text-sizes--large: 1.25rem;
+  --_neo-font-sizes---h1--h1-serif: 3.84rem;
+  --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+  --_neo-font-sizes---h4--h4-serif: 1.92rem;
+  --_neo-font-sizes---text-sizes--tiny: .75rem;
+  --_neo-font-sizes---h2--h2-serif: 3.12rem;
+  --_neo-font-sizes---text-sizes--xlarge: 1.5rem;
+  --_neo-font-sizes---h5--h5-serif: 1.44rem;
+  --_neo-font-sizes---other-font-styles--quote-large: 2rem;
+  --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+  --_neo-font-sizes---other-font-styles--headline-xxl: 6.5rem;
+  --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 6.5rem;
+  --_neo-font-sizes---other-font-styles--headline-xxl-serif: 6.24rem;
+  --_neo-font-sizes---other-font-styles--headline-xl: 5rem;
+  --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 5rem;
+  --_neo-font-sizes---other-font-styles--headline-xl-serif: 4.8rem;
+  --_neo-font-sizes---other-font-styles--cta_product-h2: 3.25rem;
+  --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+  --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 3.12rem;
+  --_neo-style-sizes---grid-3-column-gap: 2rem;
+  --_neo-style-sizes---grip-row-gap: 2rem
+}
+
+.heading-style-h2.text-align-center {
+  text-align: center
+}
+
+.heading-style-h2.is-serif {
+  font-family: var(--font--secondary-light);
+  font-size: var(--_neo-font-sizes---h2--h2-serif);
+  font-weight: var(--font--secondary-light-weight);
+  letter-spacing: var(--_neo-font-sizes---serif-global-sizes--serif-letterspacing)
+}
+
+.padding-top {
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0
+}
+
+.section_layout235 {
+  color: var(--text-color--text-primary\<deleted\|relume-variable-text-color-1\>);
+  background-color: #0000
+}
+
+.padding-global {
+  padding-left: 0;
+  padding-right: 0
+}
+
+.layout235_component {
+  z-index: 9;
+  position: relative
+}
+
+.layout235_item {
+  border: 1px solid var(--border-color--border-primary);
+  border-radius: var(--radius--radius-medium);
+  width: 100%;
+  height: 100%;
+  color: var(--base-color-neutral--black);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem;
+  text-decoration: none;
+  display: flex
+}
+
+.layout235_item:hover {
+  pointer-events: auto
+}
+
+.layout178_image-wrapper {
+  border-radius: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden
+}
+
+.layout235_image {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%
+}
+
+.text-style-tagline {
+  font-family: var(--font--primary-bold);
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---text-sizes--medium);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-bold-weight);
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  display: inline-block
+}
+
+.section_header1 {
+  color: var(--text-color--text-primary\<deleted\|relume-variable-text-color-1\>);
+  background-color: #0000
+}
+
+.header1_image {
+  aspect-ratio: auto;
+  border-radius: var(--radius--radius-medium);
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  margin-right: 0;
+  overflow: clip
+}
+
+.neo-teaser-card {
+  border-radius: var(--radius--radius-medium);
+  min-width: 256px;
+  height: 100%;
+  display: block
+}
+
+.section_faq3 {
+  background-color: var(--background-color--background-primary);
+  color: var(--text-color--text-primary\<deleted\|relume-variable-text-color-1\>)
+}
+
+.faq3_content {
+  grid-column-gap: 5rem;
+  grid-row-gap: 4rem;
+  grid-template-rows: auto;
+  grid-template-columns: .5fr 1fr;
+  grid-auto-columns: 1fr;
+  align-items: start;
+  display: grid
+}
+
+.faq3_list {
+  border-bottom: 1px solid var(--border-color--border-primary\<deleted\|relume-variable-border-color-1\>)
+}
+
+.faq3_accordion {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch
+}
+
+.faq3_question {
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  border-style: solid;
+  border-width: 1px 0 0;
+  border-color: var(--base-color-neutral--grey-50)var(--base-color-neutral--grey-50)var(--base-color-neutral--grey-50)var(--base-color-neutral--grey-97);
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  display: flex
+}
+
+.faq3_icon-wrapper {
+  align-self: flex-start;
+  width: 2rem;
+  display: flex
+}
+
+.icon-embed-small-5 {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  position: static
+}
+
+.faq3_answer {
+  overflow: hidden
+}
+
+.icon-teaser-card {
+  display: none
+}
+
+.icon-teaser-card:hover,
+.icon-teaser-card.icon-embed-xsmall,
+.icon-teaser-card.icon-embed-xsmall:hover {
+  display: block
+}
+
+.icon-teaser-card.icon-embed-small {
+  width: 24px;
+  height: 24px;
+  display: block
+}
+
+.layout237_list {
+  grid-column-gap: var(--_neo-style-sizes---grid-3-column-gap);
+  grid-row-gap: var(--_neo-style-sizes---grip-row-gap);
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  grid-auto-columns: 1fr;
+  place-content: stretch;
+  place-items: start center;
+  display: grid
+}
+
+.layout237_item {
+  border: 1px solid var(--border-color--border-primary);
+  border-radius: var(--radius--radius-default);
+  background-color: var(--base-color-neutral--white);
+  text-align: left;
+  width: 100%;
+  padding: 1.5rem;
+  text-decoration: none;
+  position: relative
+}
+
+.layout237_item-icon-wrapper {
+  display: inline-block
+}
+
+.section_layout21 {
+  color: var(--text-color--text-primary\<deleted\|relume-variable-text-color-1\>);
+  background-color: #0000
+}
+
+.layout21_content {
+  grid-column-gap: 5rem;
+  grid-row-gap: 4rem;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  align-items: center;
+  display: grid
+}
+
+.layout21_image-wrapper {
+  border-radius: 0;
+  overflow: hidden
+}
+
+.layout21_image {
+  aspect-ratio: auto;
+  border: 1px solid var(--border-color--border-primary);
+  border-radius: var(--radius--radius-medium);
+  object-fit: contain;
+  width: 100%;
+  height: 100%
+}
+
+.cta_newsletter {
+  background-color: var(--background-color--background-primary);
+  color: var(--text-color--text-primary\<deleted\|relume-variable-text-color-1\>)
+}
+
+.cta_newsletter-wrapper {
+  grid-column-gap: 6rem;
+  grid-row-gap: 6rem;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  place-items: center stretch;
+  display: grid
+}
+
+.cta_newsletter-content-left {
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  align-items: center;
+  width: 100%;
+  padding-right: 0;
+  display: flex
+}
+
+.padding-section-xxsmall {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.max-width-65 {
+  max-width: 65%
+}
+
+.list_checkmark {
+  font-size: var(--_neo-font-sizes---text-sizes--regular-paragraph);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  text-align: left;
+  flex-flow: column;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style-type: none;
+  display: block
+}
+
+.list_checkmark li {
+  font-size: var(--_neo-font-sizes---text-sizes--regular-paragraph);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  background-image: url(https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/67a5e52bb2077c5716fcf378_check-circle.svg);
+  background-position: 0%;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  margin-top: 0;
+  margin-bottom: 6.5px;
+  padding-left: 1.75rem
+}
+
+.teaser-icon-wrapper {
+  text-align: left;
+  flex: 0 auto;
+  justify-content: flex-end;
+  align-items: flex-end;
+  display: flex
+}
+
+.layout235_list-4columns {
+  grid-column-gap: var(--_neo-style-sizes---grid-3-column-gap);
+  grid-row-gap: var(--_neo-style-sizes---grip-row-gap);
+  flex-flow: row;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  grid-auto-columns: 1fr;
+  place-items: stretch start;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: grid
+}
+
+.layout235_list-3columns {
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  flex-flow: row;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
+  grid-auto-columns: 1fr;
+  place-items: stretch start;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: grid
+}
+
+.cta_neo-stoerer-component {
+  border-radius: var(--radius--radius-medium);
+  background-color: var(--base-color-brand--electric-lime);
+  color: #121212;
+  padding: 4rem
+}
+
+.layout235_content-top {
+  align-self: flex-start
+}
+
+.cta_icon-1x1-large {
+  width: 80px;
+  height: 80px
+}
+
+.text-style-tagline {
+  color: var(--text-color--text-primary);
+  font-size: var(--_neo-font-sizes---text-sizes--medium);
+  line-height: var(--_neo-font-sizes---text-sizes--text-global-lineheight);
+  font-weight: var(--font--primary-bold-weight);
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  display: inline-block
+}
+
+.wrapper-color-rounded {
+  border-radius: var(--radius--radius-medium);
+  background-color: var(--base-color-brand-soft--mint-soft);
+  color: #121212;
+  text-align: center;
+  padding: 7rem 4rem
+}
+
+.trust_3col {
+  grid-column-gap: var(--_neo-style-sizes---grid-3-column-gap);
+  grid-row-gap: var(--_neo-style-sizes---grip-row-gap);
+  flex-flow: row;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  place-items: stretch center;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex
+}
+
+.trust-card-largenumber {
+  border: 1px solid var(--border-color--border-primary);
+  border-radius: var(--radius--radius-default);
+  background-color: var(--base-color-neutral--white);
+  text-align: left;
+  width: 100%;
+  max-width: 300px;
+  padding: 1.5rem;
+  text-decoration: none;
+  position: relative
+}
+
+.trust_2col {
+  grid-column-gap: var(--_neo-style-sizes---grid-3-column-gap);
+  grid-row-gap: var(--_neo-style-sizes---grip-row-gap);
+  flex-flow: row;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  place-items: stretch center;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex
+}
+
+.section_trust-telefonie-layout235 {
+  z-index: 10;
+  color: var(--text-color--text-primary\<deleted\|relume-variable-text-color-1\>);
+  background-color: #0000;
+  position: relative
+}
+
+.text-style-tagline {
+  font-family: var(--sipgate-pattern-library-3346_sizes-font---font--primary-bold);
+  color: var(--sipgate-pattern-library-3346_color-semantics---text-color--text-primary);
+  justify-content: center;
+  align-items: center;
+  font-family: PX Grotesk Bold, Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5em;
+  text-decoration: none;
+  display: inline-block
+}
+
+.is-serif {
+  font-weight: var(--sipgate-pattern-library-3346_sizes-font---font--secondary-light-weight)
+}
+
+.text-style-tagline {
+  color: #121212;
+  justify-content: center;
+  align-items: center;
+  font-family: PX Grotesk Bold, Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5em;
+  text-decoration: none;
+  display: inline-block
+}
+
+.text-style-tagline {
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block
+}
+
+.text-style-tagline {
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block
+}
+
+@media screen and (max-width:991px) {
+  body {
+    --sipgate-pattern-library-3346_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-bold-weight: 700;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-small: .875rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4: 1.75rem;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4-lineheight: 1.2em;
+    --sipgate-pattern-library-3346_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4-serif: 1.68rem;
+    --sipgate-pattern-library-3346_sizes-font---font--secondary-light-weight: 300;
+    --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6-lineheight: 1.4em;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-large: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2: 2.75rem;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2-lineheigt: 1.15em;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2-serif: 2.64rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-medium: 1.125rem;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5: 1.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5-lineheight: 1.4em;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5-serif: 1.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3: 2.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3-lineheight: 1.2em;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3-serif: 2.16rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-serif: 3.84rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-lineheight: 4rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-tiny: .75rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-regular: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl: 4rem;
+    --sipgate-pattern-library-3346_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-xlarge: 1.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1: 3.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1-serif: 3.36rem;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-regular-weight: 400;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl: 4.5rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-serif: 4.32rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-lineheigt: 4.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1-lineheight: 1.1em;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6-serif: 1.4rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em
+  }
+
+  body {
+    --_neo-font-sizes---h1--h1: 3.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2.75rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2.25rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1.125rem;
+    --_neo-font-sizes---h5--h5: 1.5rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.75rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.25rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 2.16rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.25rem;
+    --_neo-font-sizes---h1--h1-serif: 3.36rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.68rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 2.64rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.5rem;
+    --_neo-font-sizes---h5--h5-serif: 1.44rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.75rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 4.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 4.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 4.32rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 4rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 4rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 3.84rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2.75rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 2.64rem;
+    --_neo-style-sizes---grid-3-column-gap: 1.5rem;
+    --_neo-style-sizes---grip-row-gap: 1.5rem;
+    --_sizes-font---text-sizes--text-size-small: .875rem;
+    --_sizes-font---font--secondary-light-weight: 300;
+    --_sizes-font---h1--h1-lineheight: 1.1em;
+    --_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_sizes-font---headline-xxl--headline-xxl-lineheigt: 4.5rem;
+    --_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+    --_sizes-font---h5--h5: 1.5rem;
+    --_sizes-font---h3--h3: 2.25rem;
+    --_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+    --_sizes-font---h2--h2-serif: 2.64rem;
+    --_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+    --_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+    --_sizes-font---text-sizes--text-size-regular: 1rem;
+    --_sizes-font---headline-xl--headline-xl-serif: 3.84rem;
+    --_sizes-font---h1--h1-serif: 3.36rem;
+    --_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+    --_sizes-font---text-sizes--text-size-large: 1.25rem;
+    --_sizes-font---headline-xxl--headline-xxl-serif: 4.32rem;
+    --_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+    --_sizes-font---h2--h2: 2.75rem;
+    --_sizes-font---h6--h6-serif: 1.4rem;
+    --_sizes-font---h5--h5-lineheight: 1.4em;
+    --_sizes-font---h6--h6: 1.25rem;
+    --_sizes-font---font--primary-regular-weight: 400;
+    --_sizes-font---other-font-styles--quote-large: 2rem;
+    --_sizes-font---text-sizes--text-size-tiny: .75rem;
+    --_sizes-font---headline-xl--headline-xl: 4rem;
+    --_sizes-font---text-sizes--text-size-xlarge: 1.5rem;
+    --_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+    --_sizes-font---h3--h3-serif: 2.16rem;
+    --_sizes-font---h2--h2-lineheigt: 1.15em;
+    --_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+    --_sizes-font---headline-xl--headline-xl-lineheight: 4rem;
+    --_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+    --_sizes-font---h4--h4-serif: 1.68rem;
+    --_sizes-font---text-sizes--text-size-medium: 1.125rem;
+    --_sizes-font---h4--h4: 1.75rem;
+    --_sizes-font---h1--h1: 3.5rem;
+    --_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_sizes-font---h6--h6-lineheight: 1.4em;
+    --_sizes-font---font--primary-bold-weight: 700;
+    --_sizes-font---h3--h3-lineheight: 1.2em;
+    --_sizes-font---h4--h4-lineheight: 1.2em;
+    --_sizes-font---headline-xxl--headline-xxl: 4.5rem;
+    --_sizes-font---h5--h5-serif: 1.44rem
+  }
+
+  h1 {
+    font-size: 3.25rem
+  }
+
+  h4 {
+    font-size: 24.38px
+  }
+
+  .button-group,
+  .button-group.text-align-left {
+    justify-content: flex-start
+  }
+
+  .padding-section-large {
+    padding-top: 6rem;
+    padding-bottom: 6rem
+  }
+
+  .padding-section-large.is-first {
+    padding-top: 8rem
+  }
+
+  .header1_content {
+    grid-column-gap: 4rem;
+    grid-row-gap: 4rem;
+    text-align: center;
+    grid-template-columns: 1fr;
+    place-items: stretch stretch
+  }
+
+  .header1_component {
+    grid-column-gap: 52px;
+    grid-row-gap: 52px;
+    text-align: center;
+    flex: 0 auto;
+    grid-template-rows: auto minmax(auto, 1fr);
+    grid-template-columns: minmax(0, 100%);
+    grid-auto-flow: column;
+    place-content: center;
+    align-self: auto;
+    place-items: center;
+    min-height: auto
+  }
+
+  .heading-style-h3 {
+    font-size: var(--_neo-font-sizes---h3--h3)
+  }
+
+  .spacer-small {
+    display: block
+  }
+
+  .heading-style-h1.is-serif {
+    font-family: var(--font--secondary-light);
+    font-weight: 300
+  }
+
+  .padding-section-medium {
+    padding-top: 4rem;
+    padding-bottom: 4rem
+  }
+
+  .spacer-large {
+    padding-top: 2.5rem
+  }
+
+  .spacer-xsmall {
+    display: block
+  }
+
+  .align-center {
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .heading-style-h2 {
+    --_neo-font-sizes---h1--h1: 3.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2.75rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2.25rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1.125rem;
+    --_neo-font-sizes---h5--h5: 1.5rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.75rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.25rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 2.16rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.25rem;
+    --_neo-font-sizes---h1--h1-serif: 3.36rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.68rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 2.64rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.5rem;
+    --_neo-font-sizes---h5--h5-serif: 1.44rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.75rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 4.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 4.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 4.32rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 4rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 4rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 3.84rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2.75rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 2.64rem;
+    --_neo-style-sizes---grid-3-column-gap: 1.5rem;
+    --_neo-style-sizes---grip-row-gap: 1.5rem
+  }
+
+  .heading-style-h2.strong.text-color-white.max-width-90.text-align-center-991,
+  .heading-style-h2.text-align-center {
+    text-align: center
+  }
+
+  .padding-top {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0
+  }
+
+  .preiseseite_feature_ai,
+  .text-style-tagline {
+    text-align: left
+  }
+
+  .text-style-tagline.text-align-center {
+    text-align: center
+  }
+
+  .header1_content-left {
+    text-align: left
+  }
+
+  .faq3_content {
+    grid-column-gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row;
+    min-height: auto
+  }
+
+  .layout237_item {
+    min-width: 256px
+  }
+
+  .section_layout21 {
+    --_neo-font-sizes---h1--h1: 3.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2.75rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2.25rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1.125rem;
+    --_neo-font-sizes---h5--h5: 1.5rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.75rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.25rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 2.16rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.25rem;
+    --_neo-font-sizes---h1--h1-serif: 3.36rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.68rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 2.64rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.5rem;
+    --_neo-font-sizes---h5--h5-serif: 1.44rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.75rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 4.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 4.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 4.32rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 4rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 4rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 3.84rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2.75rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 2.64rem
+  }
+
+  .layout21_content {
+    grid-column-gap: 3rem;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    min-height: auto
+  }
+
+  .cta_newsletter-wrapper {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    min-height: auto
+  }
+
+  .cta_newsletter-content-left {
+    width: 100%;
+    padding-right: 0
+  }
+
+  .max-width-65 {
+    max-width: 100%
+  }
+
+  .max-width-65.align-center {
+    flex-flow: column
+  }
+
+  .text-style-tagline {
+    text-align: left;
+    text-align: left
+  }
+
+  .trust-card-largenumber {
+    min-width: 256px
+  }
+
+  .heading-10 {
+    font-size: var(--_neo-font-sizes---h1--h1)
+  }
+
+  .text-style-tagline {
+    text-align: left
+  }
+}
+
+@media screen and (max-width:767px) {
+  body {
+    --sipgate-pattern-library-3346_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-bold-weight: 700;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-small: .875rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4: 1.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4-lineheight: 1.2em;
+    --sipgate-pattern-library-3346_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4-serif: 1.44rem;
+    --sipgate-pattern-library-3346_sizes-font---font--secondary-light-weight: 300;
+    --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6: 1.125rem;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6-lineheight: 1.4em;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-large: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2-lineheigt: 1.15em;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2-serif: 1.92rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-medium: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5-lineheight: 1.4em;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5-serif: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3-lineheight: 1.2em;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3-serif: 1.92rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-serif: 2.88rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-lineheight: 3.25rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-tiny: .75rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-regular: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl: 3rem;
+    --sipgate-pattern-library-3346_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-xlarge: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1: 2.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1-serif: 2.4rem;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-regular-weight: 400;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl: 3.5rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-serif: 3.36rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-lineheigt: 3.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1-lineheight: 1.1em;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6-serif: 1.125rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em
+  }
+
+  body {
+    --_neo-font-sizes---h1--h1: 2.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1rem;
+    --_neo-font-sizes---h5--h5: 1.25rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.5rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.125rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 1.92rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.125rem;
+    --_neo-font-sizes---h1--h1-serif: 2.4rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.44rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 1.92rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.25rem;
+    --_neo-font-sizes---h5--h5-serif: 1.2rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.5rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 3rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 3.25rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 2.88rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 3rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 3.25rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 2.88rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2.75rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 2.64rem;
+    --_neo-style-sizes---grid-3-column-gap: 1.5rem;
+    --_neo-style-sizes---grip-row-gap: 1.5rem;
+    --_sizes-font---text-sizes--text-size-small: .875rem;
+    --_sizes-font---font--secondary-light-weight: 300;
+    --_sizes-font---h1--h1-lineheight: 1.1em;
+    --_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_sizes-font---headline-xxl--headline-xxl-lineheigt: 3.5rem;
+    --_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+    --_sizes-font---h5--h5: 1.25rem;
+    --_sizes-font---h3--h3: 2rem;
+    --_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+    --_sizes-font---h2--h2-serif: 1.92rem;
+    --_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+    --_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+    --_sizes-font---text-sizes--text-size-regular: 1rem;
+    --_sizes-font---headline-xl--headline-xl-serif: 2.88rem;
+    --_sizes-font---h1--h1-serif: 2.4rem;
+    --_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+    --_sizes-font---text-sizes--text-size-large: 1.125rem;
+    --_sizes-font---headline-xxl--headline-xxl-serif: 3.36rem;
+    --_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+    --_sizes-font---h2--h2: 2rem;
+    --_sizes-font---h6--h6-serif: 1.125rem;
+    --_sizes-font---h5--h5-lineheight: 1.4em;
+    --_sizes-font---h6--h6: 1.125rem;
+    --_sizes-font---font--primary-regular-weight: 400;
+    --_sizes-font---other-font-styles--quote-large: 2rem;
+    --_sizes-font---text-sizes--text-size-tiny: .75rem;
+    --_sizes-font---headline-xl--headline-xl: 3rem;
+    --_sizes-font---text-sizes--text-size-xlarge: 1.25rem;
+    --_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+    --_sizes-font---h3--h3-serif: 1.92rem;
+    --_sizes-font---h2--h2-lineheigt: 1.15em;
+    --_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+    --_sizes-font---headline-xl--headline-xl-lineheight: 3.25rem;
+    --_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+    --_sizes-font---h4--h4-serif: 1.44rem;
+    --_sizes-font---text-sizes--text-size-medium: 1rem;
+    --_sizes-font---h4--h4: 1.5rem;
+    --_sizes-font---h1--h1: 2.5rem;
+    --_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_sizes-font---h6--h6-lineheight: 1.4em;
+    --_sizes-font---font--primary-bold-weight: 700;
+    --_sizes-font---h3--h3-lineheight: 1.2em;
+    --_sizes-font---h4--h4-lineheight: 1.2em;
+    --_sizes-font---headline-xxl--headline-xxl: 3.5rem;
+    --_sizes-font---h5--h5-serif: 1.25rem
+  }
+
+  h1 {
+    font-size: 2.5rem
+  }
+
+  h4 {
+    font-size: 21.67px;
+    line-height: var(--core--line-height-default\<deleted\|variable-d94b56a4-9493-59a7-cf23-34eb8aec3a2a\>)
+  }
+
+  .button {
+    flex: 0 auto
+  }
+
+  .button.is-secondary {
+    display: block
+  }
+
+  .button-group {
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    flex-flow: wrap;
+    justify-content: flex-start;
+    align-items: flex-start
+  }
+
+  .padding-section-large {
+    padding-top: 4rem;
+    padding-bottom: 4rem
+  }
+
+  .padding-section-large.is-first {
+    padding-top: 4rem
+  }
+
+  .header1_content {
+    grid-template-columns: 1fr
+  }
+
+  .header1_component {
+    align-content: center;
+    align-self: auto;
+    place-items: center
+  }
+
+  .text-size-medium {
+    font-size: 1rem
+  }
+
+  .heading-style-h3 {
+    font-size: var(--_neo-font-sizes---h3--h3);
+    line-height: var(--_neo-font-sizes---h3--h3-lineheight)
+  }
+
+  .spacer-medium {
+    padding-top: 1.5rem
+  }
+
+  .text-size-large {
+    font-size: 1.125rem
+  }
+
+  .container-large {
+    padding-left: 0;
+    padding-right: 0
+  }
+
+  .spacer-small {
+    padding-top: 1.25rem
+  }
+
+  .heading-style-h1.is-serif {
+    font-family: var(--font--secondary-light);
+    font-size: var(--_neo-font-sizes---h1--h1-serif);
+    font-weight: 300
+  }
+
+  .padding-section-medium {
+    padding-top: 3rem;
+    padding-bottom: 3rem
+  }
+
+  .spacer-large {
+    padding-top: 2rem
+  }
+
+  .spacer-xsmall {
+    padding-top: .75rem
+  }
+
+  .icon-embed-small {
+    width: 26px;
+    height: 26px
+  }
+
+  .heading-style-h2 {
+    --_neo-font-sizes---h1--h1: 2.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1rem;
+    --_neo-font-sizes---h5--h5: 1.25rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.5rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.125rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 1.92rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.125rem;
+    --_neo-font-sizes---h1--h1-serif: 2.4rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.44rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 1.92rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.25rem;
+    --_neo-font-sizes---h5--h5-serif: 1.2rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.5rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 3rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 3.25rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 2.88rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 3rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 3.25rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 2.88rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2.75rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 2.64rem;
+    --_neo-style-sizes---grid-3-column-gap: 1.5rem;
+    --_neo-style-sizes---grip-row-gap: 1.5rem
+  }
+
+  .heading-style-h2.is-serif {
+    line-height: var(--_neo-font-sizes---h2--h2-lineheigt)
+  }
+
+  .padding-top {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0
+  }
+
+  .padding-global {
+    padding-left: 0;
+    padding-right: 0
+  }
+
+  .faq3_content {
+    grid-row-gap: 3rem;
+    grid-template-columns: 1fr
+  }
+
+  .faq3_question {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+  }
+
+  .faq3_icon-wrapper {
+    width: 1.75rem
+  }
+
+  .icon-embed-small-5 {
+    width: 26px;
+    height: 26px
+  }
+
+  .layout502_tab-wrapper,
+  .layout237_list {
+    grid-row-gap: 3rem;
+    grid-template-columns: 1fr
+  }
+
+  .layout237_item {
+    min-width: auto
+  }
+
+  .layout212_content,
+  .layout237-card-slot,
+  .layout21_content {
+    grid-row-gap: 3rem;
+    grid-template-columns: 1fr
+  }
+
+  .cta_newsletter-wrapper {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem
+  }
+
+  .padding-section-xxsmall {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+  }
+
+  .max-width-65.align-center {
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .layout235_list-4columns,
+  .layout235_list-3columns {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    grid-auto-columns: 1fr;
+    display: grid
+  }
+
+  .cta_neo-stoerer-component {
+    padding: 2rem
+  }
+
+  .wrapper-color-rounded {
+    padding: 3rem 2rem
+  }
+
+  .trust_3col {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    grid-auto-columns: 1fr;
+    display: grid
+  }
+
+  .trust-card-largenumber {
+    min-width: auto
+  }
+
+  .trust_2col {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    grid-auto-columns: 1fr;
+    display: grid
+  }
+
+  .text-style-tagline {
+    text-align: center
+  }
+}
+
+@media screen and (max-width:479px) {
+  body {
+    --sipgate-pattern-library-3346_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-bold-weight: 700;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-small: .875rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4: 1.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4-lineheight: 1.2em;
+    --sipgate-pattern-library-3346_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---h4--h4-serif: 1.44rem;
+    --sipgate-pattern-library-3346_sizes-font---font--secondary-light-weight: 300;
+    --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6: 1.125rem;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6-lineheight: 1.4em;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-large: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2-lineheigt: 1.15em;
+    --sipgate-pattern-library-3346_sizes-font---h2--h2-serif: 1.92rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-medium: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5-lineheight: 1.4em;
+    --sipgate-pattern-library-3346_sizes-font---h5--h5-serif: 1.25rem;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3-lineheight: 1.2em;
+    --sipgate-pattern-library-3346_sizes-font---h3--h3-serif: 1.92rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-serif: 2.4rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl-lineheight: 2.8rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-tiny: .75rem;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-regular: 1rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xl--headline-xl: 2.5rem;
+    --sipgate-pattern-library-3346_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---text-sizes--text-size-xlarge: 1.125rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1: 2.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1-serif: 2.1rem;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+    --sipgate-pattern-library-3346_sizes-font---font--primary-regular-weight: 400;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large: 2rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl: 3.5rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-serif: 3.36rem;
+    --sipgate-pattern-library-3346_sizes-font---headline-xxl--headline-xxl-lineheigt: 3.5rem;
+    --sipgate-pattern-library-3346_sizes-font---h1--h1-lineheight: 1.1em;
+    --sipgate-pattern-library-3346_sizes-font---h6--h6-serif: 1.125rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+    --sipgate-pattern-library-3346_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em
+  }
+
+  body {
+    --_neo-font-sizes---h1--h1: 2.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1rem;
+    --_neo-font-sizes---h5--h5: 1.25rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.5rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.125rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 1.92rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.125rem;
+    --_neo-font-sizes---h1--h1-serif: 2.4rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.44rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 1.92rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.125rem;
+    --_neo-font-sizes---h5--h5-serif: 1.2rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.5rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 3rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 3.25rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 2.88rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 2.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 2.8rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 2.4rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.2em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 1.92rem;
+    --_neo-style-sizes---grid-3-column-gap: 1rem;
+    --_neo-style-sizes---grip-row-gap: 1rem;
+    --_sizes-font---text-sizes--text-size-small: .875rem;
+    --_sizes-font---font--secondary-light-weight: 300;
+    --_sizes-font---h1--h1-lineheight: 1.1em;
+    --_sizes-font---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_sizes-font---headline-xxl--headline-xxl-lineheigt: 3.5rem;
+    --_sizes-font---font--primary-bold: "PX Grotesk Bold", Arial, sans-serif;
+    --_sizes-font---h5--h5: 1.25rem;
+    --_sizes-font---h3--h3: 2rem;
+    --_sizes-font---other-font-styles--cta_product-h2: 3.25rem;
+    --_sizes-font---h2--h2-serif: 1.92rem;
+    --_sizes-font---font--primary-regular: "PX Grotesk Regular", Arial, sans-serif;
+    --_sizes-font---font--icon-font: "sipgate Icons", sans-serif;
+    --_sizes-font---text-sizes--text-size-regular: 1rem;
+    --_sizes-font---headline-xl--headline-xl-serif: 2.4rem;
+    --_sizes-font---h1--h1-serif: 2.1rem;
+    --_sizes-font---serif-global-sizes--serif-letterspacing: .02em;
+    --_sizes-font---text-sizes--text-size-large: 1.125rem;
+    --_sizes-font---headline-xxl--headline-xxl-serif: 3.36rem;
+    --_sizes-font---other-font-styles--cta_product-h2-serif: 3.12rem;
+    --_sizes-font---h2--h2: 2rem;
+    --_sizes-font---h6--h6-serif: 1.125rem;
+    --_sizes-font---h5--h5-lineheight: 1.4em;
+    --_sizes-font---h6--h6: 1.125rem;
+    --_sizes-font---font--primary-regular-weight: 400;
+    --_sizes-font---other-font-styles--quote-large: 2rem;
+    --_sizes-font---text-sizes--text-size-tiny: .75rem;
+    --_sizes-font---headline-xl--headline-xl: 2.5rem;
+    --_sizes-font---text-sizes--text-size-xlarge: 1.125rem;
+    --_sizes-font---other-font-styles--quote-large-lineheight: 1.5em;
+    --_sizes-font---h3--h3-serif: 1.92rem;
+    --_sizes-font---h2--h2-lineheigt: 1.15em;
+    --_sizes-font---font--secondary-light: "Tiempos Light", Arial, sans-serif;
+    --_sizes-font---headline-xl--headline-xl-lineheight: 2.8rem;
+    --_sizes-font---text-sizes--text-global-lineheight: 1.5em;
+    --_sizes-font---h4--h4-serif: 1.44rem;
+    --_sizes-font---text-sizes--text-size-medium: 1rem;
+    --_sizes-font---h4--h4: 1.5rem;
+    --_sizes-font---h1--h1: 2.5rem;
+    --_sizes-font---other-font-styles--cta_product-h2-lineheight: 1.15em;
+    --_sizes-font---h6--h6-lineheight: 1.4em;
+    --_sizes-font---font--primary-bold-weight: 700;
+    --_sizes-font---h3--h3-lineheight: 1.2em;
+    --_sizes-font---h4--h4-lineheight: 1.2em;
+    --_sizes-font---headline-xxl--headline-xxl: 3.5rem;
+    --_sizes-font---h5--h5-serif: 1.25rem
+  }
+
+  h1 {
+    font-size: 2.0625rem
+  }
+
+  h3,
+  h4 {
+    font-size: 21.67px;
+    line-height: var(--core--line-height-default\<deleted\|variable-d94b56a4-9493-59a7-cf23-34eb8aec3a2a\>)
+  }
+
+  .button {
+    margin-left: 0;
+    margin-right: 0
+  }
+
+  .button-group {
+    flex-flow: column;
+    align-items: stretch
+  }
+
+  .text-align-center {
+    padding-left: 1rem;
+    padding-right: 1rem
+  }
+
+  .padding-section-large.is-first {
+    padding-top: 4rem
+  }
+
+  .header1_content,
+  .header1_content.stage-content-padding {
+    margin-top: 0
+  }
+
+  .header1_component {
+    grid-template-columns: minmax(0, 100%);
+    grid-auto-flow: row;
+    align-self: flex-start
+  }
+
+  .text-size-medium {
+    text-align: left
+  }
+
+  .text-size-medium.text-align-center {
+    text-align: center
+  }
+
+  .heading-style-h3 {
+    font-size: var(--_neo-font-sizes---h3--h3);
+    line-height: var(--_neo-font-sizes---h3--h3-lineheight)
+  }
+
+  .heading-style-h2 {
+    --_neo-font-sizes---h1--h1: 2.5rem;
+    --_neo-font-sizes---h1--h1-lineheight: 1.1em;
+    --_neo-font-sizes---h2--h2: 2rem;
+    --_neo-font-sizes---h2--h2-lineheigt: 1.15em;
+    --_neo-font-sizes---h3--h3: 2rem;
+    --_neo-font-sizes---h3--h3-lineheight: 1.15em;
+    --_neo-font-sizes---text-sizes--regular-paragraph: 1rem;
+    --_neo-font-sizes---text-sizes--text-global-lineheight: 1.5em;
+    --_neo-font-sizes---text-sizes--medium: 1rem;
+    --_neo-font-sizes---h5--h5: 1.25rem;
+    --_neo-font-sizes---h5--h5-lineheight: 1.4em;
+    --_neo-font-sizes---h4--h4: 1.5rem;
+    --_neo-font-sizes---h4--h4-lineheight: 1.15em;
+    --_neo-font-sizes---h6--h6: 1.125rem;
+    --_neo-font-sizes---h6--h6-lineheight: 1.4em;
+    --_neo-font-sizes---text-sizes--small: .875rem;
+    --_neo-font-sizes---h3--h3-serif: 1.92rem;
+    --_neo-font-sizes---serif-global-sizes--serif-letterspacing: .02em;
+    --_neo-font-sizes---text-sizes--large: 1.125rem;
+    --_neo-font-sizes---h1--h1-serif: 2.4rem;
+    --_neo-font-sizes---serif-global-sizes--serif-large-lineheight: 1.5em;
+    --_neo-font-sizes---h4--h4-serif: 1.44rem;
+    --_neo-font-sizes---text-sizes--tiny: .75rem;
+    --_neo-font-sizes---h2--h2-serif: 1.92rem;
+    --_neo-font-sizes---text-sizes--xlarge: 1.125rem;
+    --_neo-font-sizes---h5--h5-serif: 1.2rem;
+    --_neo-font-sizes---other-font-styles--quote-large: 1.5rem;
+    --_neo-font-sizes---other-font-styles--quote-large-lineheight: 1.5em;
+    --_neo-font-sizes---other-font-styles--headline-xxl: 3rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-lineheigt: 3.25rem;
+    --_neo-font-sizes---other-font-styles--headline-xxl-serif: 2.88rem;
+    --_neo-font-sizes---other-font-styles--headline-xl: 2.5rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-lineheight: 2.8rem;
+    --_neo-font-sizes---other-font-styles--headline-xl-serif: 2.4rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2: 2rem;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-lineheight: 1.2em;
+    --_neo-font-sizes---other-font-styles--cta_product-h2-serif: 1.92rem;
+    --_neo-style-sizes---grid-3-column-gap: 1rem;
+    --_neo-style-sizes---grip-row-gap: 1rem
+  }
+
+  .padding-top {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0
+  }
+
+  .cta1_content,
+  .faq3_content {
+    grid-template-columns: 1fr
+  }
+
+  .layout237_list {
+    grid-row-gap: 1rem;
+    grid-template-columns: 1fr
+  }
+
+  .layout21_content,
+  .layout495_tabs,
+  .cta39_card {
+    grid-template-columns: 1fr
+  }
+
+  .cta_newsletter-wrapper {
+    grid-template-columns: 1fr
+  }
+
+  .cta_newsletter-content-left {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start
+  }
+
+  .max-width-65.align-center {
+    flex-flow: column
+  }
+
+  .layout235_list-4columns,
+  .layout235_list-3columns {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    grid-auto-columns: 1fr;
+    display: grid
+  }
+
+  .cta_neo-stoerer-component {
+    padding: 1.5rem
+  }
+
+  .wrapper-color-rounded {
+    padding: 4rem 1.5rem
+  }
+
+  .trust_3col,
+  .trust_2col {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    grid-auto-columns: 1fr;
+    display: grid
+  }
+}
+
+#w-node-_6a361dc3-617e-79db-0024-3223bc537d7a-bc537d7a {
+  align-self: stretch
+}
+
+#w-node-da0de478-d805-c437-2fb1-0bc9d010091c-d0100916,
+#w-node-da0de478-d805-c437-2fb1-0bc9d010092d-d0100916,
+#w-node-_13b072b5-f994-3ffa-cc65-edc626c8f82d-5b451af4 {
+  align-self: center
+}
+
+#w-node-_726bf993-6dc4-759f-a4a3-d0cff9b1bcbf-f9b1bcb9 {
+  align-self: center
+}
+
+#w-node-cd7f1c2c-2cdb-9a18-3872-f7495d8015af-5d801598,
+#w-node-cd7f1c2c-2cdb-9a18-3872-f7495d8015b9-5d801598,
+#w-node-cd7f1c2c-2cdb-9a18-3872-f7495d8015c3-5d801598,
+#w-node-cd7f1c2c-2cdb-9a18-3872-f7495d8015cf-5d801598,
+#w-node-cd7f1c2c-2cdb-9a18-3872-f7495d8015d9-5d801598 {
+  align-self: stretch
+}
+
+@media screen and (max-width:991px) {
+  #w-node-_452c1e0c-7226-bf75-10fc-9d59205ae59b-08419cde {
+    order: -9999
+  }
+}
+
+@media screen and (max-width:479px) {
+
+  #w-node-_726bf993-6dc4-759f-a4a3-d0cff9b1bcbf-f9b1bcb9,
+  #w-node-b404c2f8-e769-db8e-d857-bac7626ec7e0-78f69a6f {
+    grid-area: span 1/span 1/span 1/span 1;
+    align-self: center
+  }
+}
+
+.container-large {
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1312px;
+  height: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible;
+}
+
+/* ---- Footer ---- */
+footer {
+  border-top: 1px solid var(--border-light);
+  padding: 80px 0 40px;
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-glow {
+  width: 900px;
+  max-width: 140%;
+  height: 340px;
+  bottom: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 55% 100% at 50% 100%, rgba(209, 248, 42, 0.30) 0%, rgba(209, 248, 42, 0.1) 42%, rgba(5, 5, 5, 0) 75%);
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+@media(max-width:768px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 36px;
+  }
+}
+
+.footer-brand p {
+  color: var(--text-muted);
+  margin-top: 16px;
+  font-size: 14px;
+  max-width: 34ch;
+}
+
+.footer-col h4 {
+  font-size: 13px;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 7px 0;
+}
+
+.footer-col a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light); */
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.lang-switch a {
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.lang-switch a.active {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.made-by-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: color .2s ease;
+}
+
+.made-by-link:hover {
+  color: var(--accent);
+}
+
+.footer-offices {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  margin-bottom: 32px;
+}
+
+@media(max-width:768px) {
+  .footer-offices {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.footer-office-col h4 {
+  font-size: 13px;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.office-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+@media(max-width:560px) {
+  .office-blocks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.office-block {
+  font-size: 13.5px;
+  color: var(--text-muted) !important;
+  line-height: 1.5;
+}
+
+.office-block p {
+  font-size: 13.5px;
+  color: var(--text-muted) !important;
+  line-height: 1.5;
+}
+
+.office-block strong {
+  display: block;
+  color: var(--text-main);
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 4px;
+  font-size: 13.5px;
+}
+
+.phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.phone-list a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.phone-list a:hover {
+  color: var(--accent);
+}
+
+.phone-list .flag {
+  flex: none;
+}
+
+.phone-list .num {
+  color: var(--text-main);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.wrap {
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  transition: transform .35s ease;
+}
+
+header.header-hidden {
+  transform: translateY(-100%);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wordmark {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.wordmark span {
+  color: var(--accent);
+}
+
+.logo-img {
+  height: 78px;
+  width: auto;
+  display: block;
+}
+
+.footer-brand .logo-img {
+  height: 104px;
+  margin-bottom: 16px;
+}
+
+nav.primary {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+nav.primary a {
+  font-size: 15px !important;
+  color: var(--text-muted) ;
+  transition: color .2s;
+}
+
+nav.primary a:hover,
+nav.primary a:focus-visible {
+  color: var(--accent);
+}
+
+nav.primary a.btn-fill:hover,
+nav.primary a.btn-fill:focus-visible {
+  color: #000 !important;
+}
+
+nav.primary a.btn-fill {
+  color: #000;
+}
+.btn-fill {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-fill:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-dim);
+}
+
+.nav-lang {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.nav-lang a {
+  font-size: 14px;
+  padding: 0 4px;
+  color: var(--text-muted);
+}
+
+.nav-lang a.active {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.nav-lang a:hover {
+  color: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.btn {
+  cursor: pointer;
+  border: 1px solid #0000;
+  border-radius: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: Space Grotesk, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all .2s;
+  display: inline-flex;
+}
+
+@media(max-width:900px) {
+  nav.primary {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 80px);
+    background: var(--bg-main);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 12px 24px;
+    transform: translateX(100%);
+    transition: transform .25s ease;
+    overflow-y: auto;
+  }
+
+  nav.primary.open {
+    transform: translateX(0);
+  }
+
+  nav.primary>a {
+    width: 100%;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 16px;
+  }
+
+  nav.primary .btn {
+    margin-top: 20px;
+  }
+
+  .nav-lang {
+    width: 100%;
+    padding: 18px 0;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+}
+
+footer a {
+  text-decoration: none;
+}
+
+header a {
+  text-decoration: none;
+}
+
+.footer-glow {
+  display: none;
+}
+
+.faq3_accordion {
+  width: 100%;
+  border-bottom: 1px solid currentColor;
+}
+
+.faq3_question {
+  width: 100%;
+}

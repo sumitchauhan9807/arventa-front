@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import "@/app/cookie.css";
+import "@/app/css/cookie.css";
 import { useSelector } from "react-redux";
 
 const cookieContent = {
