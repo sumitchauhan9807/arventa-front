@@ -65,7 +65,10 @@ export default function TermsOfUsePage() {
     );
   }
 
-  const templateVariables = siteMeta[window.location.hostname];
+  let hostname = window.location.hostname
+  hostname = hostname.replace(/^www\./, "")
+
+  const templateVariables = siteMeta[hostname];
 
   const content = replaceVariables(data?.privacyPolicy?.content ?? '', templateVariables);
 
