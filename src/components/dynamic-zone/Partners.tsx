@@ -43,7 +43,7 @@ const Partners = (props) => {
                 className="group flex flex-col items-center"
               >
                 {/* Logo */}
-                <div className="flex mb-4 h-24 w-full items-center justify-center rounded-xl border border-gray-100 bg-gray-50 p-6 [perspective:1000px] transition-all duration-300 hover:-translate-y-2 hover:border-indigo-100 hover:bg-white hover:shadow-xl">
+                <div className="flex mb-4 h-24 w-full items-center justify-center rounded-xl border border-gray-100 bg-gray-50 p-6 hover:border-indigo-100 hover:bg-white hover:shadow-xl">
                   <img
                     key={animationKey[index] || 0}
                     src={appendBaseUrl(item.image.url)}
@@ -55,18 +55,11 @@ const Partners = (props) => {
                       object-contain
                       grayscale
                       opacity-60
-                      [transform-style:preserve-3d]
+                     
                       cursor-pointer
 
-                      /* Mobile / click animation */
-                      
-
-                      /* Desktop hover animation */
-                      transition-all
-                      duration-700
-                      ease-out
                      
-                      group-hover:scale-110
+                      
                       group-hover:grayscale-0
                       group-hover:opacity-100
                     "
