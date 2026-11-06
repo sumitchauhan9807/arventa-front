@@ -93,7 +93,7 @@ const Footer = () => {
                       return (
                         <p key={index} style={{ marginTop: '5px' }} className="flex flex-wrap items-center gap-2">
                           <span>{con?.flag}</span>
-                          <span className="num">{con?.number}</span>
+                          <a href={`tel:${con?.number}`} className="num">{con?.number}</a>
                           <span style={{ marginTop: '-8px' }}>{con?.text}</span>
                         </p>
                       );
