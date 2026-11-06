@@ -85,17 +85,19 @@ const Footer = () => {
             <div className="office-blocks grid w-full grid-cols-1 gap-x-8 gap-y-8 text-white sm:grid-cols-2 lg:grid-cols-4">
               {/* USA */}
               {footerOffices.offices.map((office, index) => {
-                const contact = office.contact
+                const contact = office.contact;
                 return (
                   <div key={index} className="office-block space-y-1 text-white">
                     <StrapiRichText content={office.content} />
-                    <p style={{marginTop:"5px"}} className="flex flex-wrap items-center gap-2">
-                      <span>{contact?.flag}</span>
-                      <span  className="num">
-                        {contact?.number}
-                      </span>
-                      <span style={{marginTop:"-8px"}}>{contact?.text}</span>
-                    </p>
+                    {contact.map((con, index) => {
+                      return (
+                        <p key={index} style={{ marginTop: '5px' }} className="flex flex-wrap items-center gap-2">
+                          <span>{con?.flag}</span>
+                          <span className="num">{con?.number}</span>
+                          <span style={{ marginTop: '-8px' }}>{con?.text}</span>
+                        </p>
+                      );
+                    })}
                   </div>
                 );
               })}
