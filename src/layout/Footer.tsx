@@ -89,6 +89,7 @@ const Footer = () => {
                 return (
                   <div key={index} className="office-block space-y-1 text-white">
                     <StrapiRichText content={office.content} />
+                    <a href={`mailto:${office?.mail}`}>{office?.mail}</a>
                     {contact.map((con, index) => {
                       return (
                         <p key={index} style={{ marginTop: '5px' }} className="flex flex-wrap items-center gap-2">

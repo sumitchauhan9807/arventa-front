@@ -36,6 +36,7 @@ export const FOOTER_QUERY = gql`
         heading
         offices {
           content
+          mail
           contact {
             flag
             number
