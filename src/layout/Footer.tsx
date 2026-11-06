@@ -50,7 +50,7 @@ const Footer = () => {
             );
           })}
         </div>
-        <div className="footer-offices">
+        {/* <div className="footer-offices">
           <div className="footer-office-col">
             <h4>{footerOffices.heading}</h4>
             <div className="office-blocks">
@@ -77,6 +77,30 @@ const Footer = () => {
               })}
             </div>
           </div>
+        </div> */}
+        <div className="footer-offices w-full">
+          <div className="footer-office-col w-full">
+            <h4 className="mb-6 text-white">{footerOffices.heading}</h4>
+
+            <div className="office-blocks grid w-full grid-cols-1 gap-x-8 gap-y-8 text-white sm:grid-cols-2 lg:grid-cols-4">
+              {/* USA */}
+              {footerOffices.offices.map((office, index) => {
+                const contact = office.contact
+                return (
+                  <div key={index} className="office-block space-y-1 text-white">
+                    <StrapiRichText content={office.content} />
+                    <p style={{marginTop:"5px"}} className="flex flex-wrap items-center gap-2">
+                      <span>{contact?.flag}</span>
+                      <span  className="num">
+                        {contact?.number}
+                      </span>
+                      <span style={{marginTop:"-8px"}}>{contact?.text}</span>
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
         <div className="footer-bottom flex flex-col items-center gap-3 sm:flex-row sm:items-center">
           <div className="text-center sm:text-left">
@@ -88,14 +112,14 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center gap-2 sm:ml-auto sm:flex-row sm:gap-4">
-            <a  href="/cookie-policy" rel="noopener" className="made-by-link">
+            <a href="/cookie-policy" rel="noopener" className="made-by-link">
               {data.footer.cookiePolicy.name}
             </a>
             <a href="/privacy-policy" rel="noopener" className="made-by-link">
               {data.footer.privacyPolicy.name}
             </a>
 
-            <a  href="/terms-of-use" rel="noopener" className="made-by-link">
+            <a href="/terms-of-use" rel="noopener" className="made-by-link">
               {data.footer.termsOfUse.name}
             </a>
           </div>

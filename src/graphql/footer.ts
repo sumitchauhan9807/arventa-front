@@ -36,6 +36,11 @@ export const FOOTER_QUERY = gql`
         heading
         offices {
           content
+          contact {
+            flag
+            number
+            text
+          }
         }
       }
       footerTop {
