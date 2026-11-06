@@ -43,7 +43,7 @@ const StrapiRichText = ({ content = [] }) => {
           }
 
           return (
-            <p key={index}>
+            <p style={{width:"115%"}} key={index}>
               {renderText(block.children)}
             </p>
           );
