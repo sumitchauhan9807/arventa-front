@@ -397,7 +397,7 @@ function InternationalNumbersSection({ data }: { data?: any }) {
                   <div className="spacer-large" />
                 </div>
 
-                <div className="layout235_list-3columns">
+                <div className="">
                   {(data?.imageBlocks ?? []).map((block: any, index: number) => (
                     <InternationalNumberCard key={block?.id ?? index} block={block} />
                   ))}
