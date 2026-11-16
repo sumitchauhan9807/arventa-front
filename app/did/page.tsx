@@ -415,9 +415,9 @@ function InternationalNumberCard({ block }: { block?: any }) {
   const imageUrl = getImageUrl(block?.image);
 
   return (
-    <div className="neo-teaser-card">
+    <div className="neo-teaser-card mb-12">
       <div
-        className="layout235_item w-inline-block"
+        className=""
         style={{
           transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)',
           transformStyle: 'preserve-3d',
@@ -445,10 +445,6 @@ function InternationalNumberCard({ block }: { block?: any }) {
           <p>{block?.content}</p>
 
           <div className="spacer-xxsmall" />
-        </div>
-
-        <div className="teaser-icon-wrapper">
-          <img loading="lazy" src="https://cdn.prod.website-files.com/678900e941dcd8f65b4519f8/67a5e61e68f1f8df32c6dae4_arrow-right.svg" alt="Pfeil-nach-rechts-Icon für Weiter" className="icon-teaser-card icon-embed-small" />
         </div>
       </div>
     </div>
