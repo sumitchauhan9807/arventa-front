@@ -1,17 +1,23 @@
-"use client"
+'use client';
 import { NAVIGATION_QUERY } from '@/src/graphql/navigation';
 import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 import { appendBaseUrl } from '../helpers/common';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setLocale } from '@/src/store/localeSlice';
-import Link from 'next/link';
+import { useLocale } from '@/src/hooks/useLocale';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 const Header = () => {
-  const locale = useSelector((state) => state.locale.locale);
-  const dispatch = useDispatch();
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = (lang) => {
+    const newPath = pathname.replace(`/${locale}`, `/${lang}`);
 
+    router.push(newPath + window.location.hash);
+  };
+  const params = useParams();
+  const locale2 = params.locale;
   const [open, setOpen] = useState(false);
   const { data, loading, error } = useQuery(NAVIGATION_QUERY, {
     variables: {
@@ -20,25 +26,34 @@ const Header = () => {
     fetchPolicy: 'no-cache',
   });
 
-  const linkUrl = (url:string) => {
-    if(window.location.pathname == '/'){ 
-      return url
-    }
-    return '/'+url
-  }
   if (loading) return <PageSkeleton />;
   if (error) return <p>Error</p>;
 
   if (!data?.navigation) return <PageSkeleton />;
   // console.log(data.navigation);
+  console.log(params.locale);
   return (
     <header>
       <div className="header-inner">
-        <a href="/" className="wordmark">
-          <img style={{height:data.navigation.height,width:data.navigation.width}} src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
+        <a href={`/${locale}`} className="wordmark">
+          <img style={{ height: data.navigation.height, width: data.navigation.width }} src={appendBaseUrl(data.navigation.logo.url)} alt="Arventa Networks" className="logo-img" />
         </a>
         <nav className={`primary ${open ? 'open' : ''}`} id="primaryNav">
           {data.navigation.navigation.map((item, index) => {
+            if (item.link == 'did') {
+              return (
+                <a
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  key={index}
+                  href={'/' + item.link + '/' + locale2}
+                  //  href={'/' + item.link}
+                >
+                  {item.text}
+                </a>
+              );
+            }
             if (item.linkType == 'Normal') {
               return (
                 <a
@@ -46,7 +61,8 @@ const Header = () => {
                     setOpen(false);
                   }}
                   key={index}
-                  href={"/"+item.link}
+                  href={'/' + locale2 + item.link}
+                  //  href={'/' + item.link}
                 >
                   {item.text}
                 </a>
@@ -72,7 +88,7 @@ const Header = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(setLocale('en'));
+                dispatch('en');
               }}
               className={`${locale == 'en' ? 'active' : ''}`}
             >
@@ -84,7 +100,7 @@ const Header = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(setLocale('de'));
+                dispatch('de');
               }}
             >
               DE

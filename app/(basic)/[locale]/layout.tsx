@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Geist, Geist_Mono } from 'next/font/google';
-import '../css/globals.css';
+import '../../css/globals.css';
 import ReactQueryProvider from '@/src/http-client/ReactQueryProvider';
 import ApolloProvider from '@/src/http-client/ApolloProvider';
-import Providers from '../providers';
+import Providers from '../../providers';
 
 export const metadata: Metadata = {
   title: 'Arventa Networks 24/7',

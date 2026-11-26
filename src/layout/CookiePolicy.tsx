@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import "@/app/css/cookie.css";
-import { useSelector } from "react-redux";
+import { useLocale } from "@/src/hooks/useLocale";
 
 const cookieContent = {
   en: {
@@ -107,7 +107,7 @@ const getCookieContent = (locale) => {
 };
 
 const CookiePolicy = () => {
-  const locale = useSelector((state) => state.locale.locale);
+  const locale = useLocale()
 
   const content = getCookieContent(locale);
 

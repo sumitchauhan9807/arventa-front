@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { axiosClient } from '@/src/http-client/axios';
-import { useSelector } from 'react-redux';
+import { useLocale } from "@/src/hooks/useLocale";
 
 function createZodSchema(fields) {
   const shape = {};
@@ -64,7 +64,7 @@ function createZodSchema(fields) {
 }
 
 const ContactForm = (props) => {
-  const locale = useSelector((state) => state.locale.locale);
+  const locale = useLocale()
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [reCaptcha, setReCaptcha] = useState('');
   const [loading, setLoading] = useState(false);

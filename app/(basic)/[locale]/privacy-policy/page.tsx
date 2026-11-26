@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { useQuery } from '@apollo/client/react';
 import { gql } from '@apollo/client';
 import { PageSkeleton } from '@/src/components/Skeletons';
-import { useSelector } from 'react-redux';
+import { useLocale } from "@/src/hooks/useLocale";
 import { siteMeta, replaceVariables } from '@/src/helpers/common';
 
 const GET_PRIVACY_POLICY = gql`
@@ -25,7 +25,7 @@ type PrivacyPolicyResponse = {
 };
 
 export default function TermsOfUsePage() {
-  const locale = useSelector((state) => state.locale.locale);
+  const locale = useLocale()
 
   const { data, loading, error } = useQuery<PrivacyPolicyResponse>(GET_PRIVACY_POLICY, {
     variables: {

@@ -4,10 +4,10 @@ import { useQuery } from '@apollo/client/react';
 import { PageSkeleton } from '@/src/components/Skeletons';
 import StrapiRichText from '../helpers/StrapiText';
 import { appendBaseUrl } from '../helpers/common';
-import { useSelector } from 'react-redux';
+import { useLocale } from "@/src/hooks/useLocale";
 
 const Footer = () => {
-  const locale = useSelector((state) => state.locale.locale);
+  const locale = useLocale()
   const { data, loading, error } = useQuery(FOOTER_QUERY, {
     variables: {
       locale: locale,
