@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import ReactQueryProvider from '@/src/http-client/ReactQueryProvider';
 import ApolloProvider from '@/src/http-client/ApolloProvider';
-import Providers from './providers';
+// import Providers from './providers';
+
+
 export const metadata: Metadata = {
   title: 'Arventa Networks 24/7',
   description: 'Arventa Networks 24/7',
@@ -18,8 +20,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body className="min-h-full flex flex-col">
         <ReactQueryProvider>
           <ApolloProvider>
-            {' '}
-            <Providers>{children}</Providers>
+            {children}
           </ApolloProvider>
         </ReactQueryProvider>
       </body>

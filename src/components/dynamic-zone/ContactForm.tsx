@@ -1,3 +1,4 @@
+"use client"
 import StrapiRichText from '@/src/helpers/StrapiText';
 import Form from '@/src/components/Form';
 import { useState } from 'react';

@@ -1,3 +1,4 @@
+"use client"
 import '@/app/css/team.css';
 import { appendBaseUrl } from '@/src/helpers/common';
 import { useState } from 'react';
@@ -314,7 +315,6 @@ const Team = (props) => {
 export default Team;
 
 const TeamNew = ({ data }) => {
-  console.log(data, 'Asdasdasd');
   const [activeMember, setActiveMember] = useState(null);
   return (
     <section className="team-section" id="team">

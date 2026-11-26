@@ -1,8 +1,8 @@
 import { appendBaseUrl } from '@/src/helpers/common';
-import { useLottie } from 'lottie-react';
+// import { useLottie } from 'lottie-react';
 
 const NetworkSection = (props) => {
-  const lottie = useLottie({ src: './World_map_connected.json', autoplay: true, loop: true });
+  // const lottie = useLottie({ src: './World_map_connected.json', autoplay: true, loop: true });
 
   return (
     <section id="network">

@@ -1,3 +1,4 @@
+"use client"
 import { lazy, Suspense } from 'react';
 import { PageSkeleton } from '../Skeletons';
 const Hero = lazy(() => import('./Hero'));

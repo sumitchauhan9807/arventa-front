@@ -1,47 +1,51 @@
-'use client';
 import Header from '@/src/layout/Header';
 import Footer from '@/src/layout/Footer';
-import CookiePolicy from '@/src/layout/CookiePolicy'
-import { useLocale } from "@/src/hooks/useLocale";
+import CookiePolicy from '@/src/layout/CookiePolicy';
+
 import { HOME_QUERY } from '@/src/graphql/home';
-import { useQuery } from '@apollo/client/react';
-import { PageSkeleton } from '@/src/components/Skeletons';
+import { getServerApolloClient } from '@/src/lib/apolloServer';
+
 import DynamicZone from '@/src/components/dynamic-zone';
+import { PageSkeleton } from '@/src/components/Skeletons';
 
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
 
-export default function Home() {
-  const locale = useLocale();
- // useEffect(() => {
-  //   const root = document.documentElement;
+export default async function Home({ params }: Props) {
+  let { locale } = await params;
+  locale = locale == 'de' || locale == 'en' ? locale : "en"
 
-  //   Object.entries(rootVariables).forEach(([key, value]) => {
-  //     root.style.setProperty(key, value);
-  //   });
-  // }, []);
-  // console.log(locale)
-  const { data, loading, error } = useQuery(HOME_QUERY, {
-    variables: {
-      locale: locale,
-    },
-    fetchPolicy: 'no-cache',
-  });
+  try {
+    const client = getServerApolloClient();
 
-  if (loading) return <PageSkeleton />;
-  if (error) return <p>Error</p>;
-  // console.log(data?.home.content);
-  // console.log(data)
+    const { data } = await client.query({
+      query: HOME_QUERY,
+      variables: {
+        locale,
+      },
+      fetchPolicy: 'no-cache',
+    });
 
-  // return null
-  if (!data?.home) return <PageSkeleton />;
+    if (!data?.home) {
+      return <PageSkeleton />;
+    }
 
-  // let content = data?.home.blockHeading2.content
-  // console.log(content)
-  return (
-    <>
-      <Header />
-      <DynamicZone data={data?.home?.content} />
-      <Footer />
-      <CookiePolicy/>
-    </>
-  );
+    console.log(data.home)
+
+    return (
+      <>
+        <Header locale={locale}  />
+        <DynamicZone data={data.home.content} />
+        <Footer locale={locale} />
+        <CookiePolicy />
+      </>
+    );
+  } catch (error) {
+    console.error('Home page fetching error:', error);
+
+    return <p>Something went wrong while loading the homepage.</p>;
+  }
 }

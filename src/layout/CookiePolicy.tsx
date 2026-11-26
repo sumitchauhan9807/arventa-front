@@ -1,4 +1,5 @@
 
+"use client"
 import { useState } from "react";
 import "@/app/css/cookie.css";
 import { useLocale } from "@/src/hooks/useLocale";

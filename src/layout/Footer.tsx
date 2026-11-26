@@ -1,23 +1,26 @@
-'use client';
+
 import { FOOTER_QUERY } from '@/src/graphql/footer';
-import { useQuery } from '@apollo/client/react';
+import { getServerApolloClient } from '@/src/lib/apolloServer';
+
 import { PageSkeleton } from '@/src/components/Skeletons';
 import StrapiRichText from '../helpers/StrapiText';
 import { appendBaseUrl } from '../helpers/common';
-import { useLocale } from "@/src/hooks/useLocale";
 
-const Footer = () => {
-  const locale = useLocale()
-  const { data, loading, error } = useQuery(FOOTER_QUERY, {
-    variables: {
-      locale: locale,
-    },
-    fetchPolicy: 'no-cache',
-  });
-  if (loading) return <PageSkeleton />;
-  if (error) return <p>Error</p>;
 
-  if (!data?.footer) return <PageSkeleton />;
+const Footer = async ({locale}) => {
+  const client = getServerApolloClient();
+
+  const { data } = await client.query({
+      query: FOOTER_QUERY,
+      variables: {
+        locale,
+      },
+      fetchPolicy: 'no-cache',
+    });
+  
+    if (!data?.footer) {
+      return <PageSkeleton />;
+    }
   // console.log(data.footer);
   const footerTop = data.footer.footerTop;
   const footerCallUs = data.footer.footerCallUs;
@@ -115,14 +118,14 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center gap-2 sm:ml-auto sm:flex-row sm:gap-4">
-            <a href="/cookie-policy" rel="noopener" className="made-by-link">
+            <a href={`/cookie-policy/${locale}`} rel="noopener" className="made-by-link">
               {data.footer.cookiePolicy.name}
             </a>
-            <a href="/privacy-policy" rel="noopener" className="made-by-link">
+            <a href={`/privacy-policy/${locale}`} rel="noopener" className="made-by-link">
               {data.footer.privacyPolicy.name}
             </a>
 
-            <a href="/terms-of-use" rel="noopener" className="made-by-link">
+            <a href={`/terms-of-use/${locale}`} rel="noopener" className="made-by-link">
               {data.footer.termsOfUse.name}
             </a>
           </div>

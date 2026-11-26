@@ -1,31 +1,33 @@
-'use client';
-
 import '@/app/css/did.css';
 import Header from '@/src/layout/Header';
 import Footer from '@/src/layout/Footer';
 import CookiePolicy from '@/src/layout/CookiePolicy';
-import { useLocale } from "@/src/hooks/useLocale";
 import { DID_QUERY } from '@/src/graphql/did';
-import { useQuery } from '@apollo/client/react';
+import { getServerApolloClient } from '@/src/lib/apolloServer';
+
 import { PageSkeleton } from '@/src/components/Skeletons';
 import { appendBaseUrl } from '@/src/helpers/common';
-import { useState } from 'react';
+import FAQSection from '../FaqSection';
 
-export default function Home() {
-  const locale = useLocale()
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
 
-  const { data, loading, error } = useQuery(DID_QUERY, {
+export default async function Home({ params }: Props) {
+  let { locale } = await params;
+  locale = locale == 'de' || locale == 'en' ? locale : 'en';
+
+  const client = getServerApolloClient();
+
+  const { data } = await client.query({
+    query: DID_QUERY,
     variables: {
-      locale: locale,
+      locale,
     },
     fetchPolicy: 'no-cache',
   });
-
-  if (loading) return <PageSkeleton />;
-
-  if (error) {
-    return <p>Error loading page.</p>;
-  }
 
   if (!data?.did) {
     return <PageSkeleton />;
@@ -33,9 +35,9 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <SipgatePage data={data?.did} />
-      <Footer />
+      <Footer locale={locale} />
       <CookiePolicy />
     </>
   );
@@ -454,78 +456,3 @@ function InternationalNumberCard({ block }: { block?: any }) {
 /* -------------------------------------------------------------------------- */
 /* FAQ                                                                        */
 /* -------------------------------------------------------------------------- */
-
-function FAQSection({ data }: { data?: any }) {
-  const items = data?.qna ?? [];
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  if (!data) return null;
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex((currentIndex) => (currentIndex === index ? null : index));
-  };
-
-  return (
-    <section className="section_faq3">
-      <div className="padding-global">
-        <div className="container-large">
-          <div className="padding-section-large">
-            <div className="faq3_component">
-              <div className="w-layout-grid faq3_content">
-                <div className="faq3_content-left">
-                  <h2 className="heading-style-h2 is-serif">{data?.blockHeading?.subHeading}</h2>
-
-                  <div className="spacer-small" />
-                  <div className="spacer-medium" />
-                </div>
-
-                <div className="faq3_list-wrapper">
-                  <div className="faq3_list">
-                    {items?.map((item: any, index: number) => {
-                      const isOpen = openIndex === index;
-                      const questionId = `faq-question-${index}`;
-                      const answerId = `faq-answer-${index}`;
-
-                      return (
-                        <div key={item?.id ?? index} className={`faq3_accordion ${isOpen ? 'is-open' : ''}`}>
-                          <button type="button" className="faq3_question" aria-expanded={isOpen} aria-controls={answerId} id={questionId} onClick={() => toggleFAQ(index)}>
-                            <div className="text-size-medium text-weight-bold">{item?.question}</div>
-
-                            <div className="faq3_icon-wrapper">
-                              <div className="icon-embed-small-5 w-embed">
-                                <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                  <path fillRule="evenodd" clipRule="evenodd" d="M16.5303 20.8839C16.2374 21.1768 15.7626 21.1768 15.4697 20.8839L7.82318 13.2374C7.53029 12.9445 7.53029 12.4697 7.82318 12.1768L8.17674 11.8232C8.46963 11.5303 8.9445 11.5303 9.2374 11.8232L16 18.5858L22.7626 11.8232C23.0555 11.5303 23.5303 11.5303 23.8232 11.8232L24.1768 12.1768C24.4697 12.4697 24.4697 12.9445 24.1768 13.2374L16.5303 20.8839Z" fill="currentColor" />
-                                </svg>
-                              </div>
-                            </div>
-                          </button>
-
-                          <div
-                            id={answerId}
-                            role="region"
-                            aria-labelledby={questionId}
-                            className="faq3_answer"
-                            style={{
-                              width: '100%',
-                              height: isOpen ? 'auto' : '0px',
-                              overflow: 'hidden',
-                            }}
-                          >
-                            <p>{item?.answer}</p>
-                            <div className="spacer-small" />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <div className="spacer-medium" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
