@@ -3,10 +3,8 @@ import { appendBaseUrl } from '../helpers/common';
 import HeaderClient from './HeaderClient';
 import { getServerApolloClient } from '@/src/lib/apolloServer';
 
-
-
 const Header = async ({ locale }) => {
-    const client = getServerApolloClient();
+  const client = getServerApolloClient();
 
   const { data } = await client.query({
     query: NAVIGATION_QUERY,
@@ -35,10 +33,7 @@ const Header = async ({ locale }) => {
           />
         </a>
 
-        <HeaderClient
-          locale={locale}
-          navigation={navigation.navigation}
-        />
+        <HeaderClient locale={locale} navigation={navigation.navigation} />
       </div>
     </header>
   );
