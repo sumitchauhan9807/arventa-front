@@ -1,6 +1,6 @@
 'use client';
 
-import { useState ,useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 
@@ -13,7 +13,7 @@ const HeaderClient = ({ locale, navigation }) => {
     const newPath = pathname.replace(`/${locale}`, `/${lang}`);
 
     // router.push(newPath + window.location.hash);
-    window.location = newPath + window.location.hash
+    window.location = newPath + window.location.hash;
     setOpen(false);
   };
 
@@ -45,7 +45,7 @@ const HeaderClient = ({ locale, navigation }) => {
         })}
 
         <span className="nav-lang mono">
-           <LanguageSwitcher dispatch={dispatch} locale={locale}/>
+          <LanguageSwitcher dispatch={dispatch} locale={locale} />
           {/* <a
             href="#"
             onClick={(e) => {
@@ -68,7 +68,6 @@ const HeaderClient = ({ locale, navigation }) => {
             DE
           </a> */}
         </span>
-       
       </nav>
 
       <button onClick={() => setOpen(!open)} className="nav-toggle" aria-label="Toggle navigation" aria-expanded={open}>
@@ -82,44 +81,38 @@ const HeaderClient = ({ locale, navigation }) => {
 
 export default HeaderClient;
 
-
-
-
 const languages = [
-  { code: "en", name: "English", flag: "https://prenet.world/flags/gb.webp" },
-  { code: "de", name: "Deutsch", flag: "https://prenet.world/flags/de.webp" },
+  { code: 'en', name: 'English', flag: 'https://prenet.world/flags/gb.webp' },
+  { code: 'de', name: 'Deutsch', flag: 'https://prenet.world/flags/de.webp' },
 ];
 
- function LanguageSwitcher({dispatch,locale}) {
+function LanguageSwitcher({ dispatch, locale }) {
   const [language, setLanguage] = useState(locale);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   const dispatchLanguage = (locale) => {
-    setLanguage(locale)
-    dispatch(locale)
-  }
+    setLanguage(locale);
+    dispatch(locale);
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (
-        rootRef.current &&
-        !rootRef.current.contains(event.target as Node)
-      ) {
+      if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
         setOpen(false);
       }
     }
 
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === 'Escape') setOpen(false);
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
     };
   }, []);
 
@@ -142,7 +135,7 @@ const languages = [
           focus:outline-none focus:ring-2 focus:ring-white/30"
       >
         {/* Globe icon */}
-        <svg
+        {/* <svg
           viewBox="0 0 24 24"
           width="16"
           height="16"
@@ -154,18 +147,12 @@ const languages = [
         >
           <circle cx="12" cy="12" r="9" />
           <path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9M12 3C9.4 5.8 8.1 8.8 8.1 12s1.3 6.2 3.9 9" />
-        </svg>
+        </svg> */}
+        <img src={selected.flag} alt="" width="18" height="14" loading="lazy" className="h-3.5 w-[18px] rounded-[2px] object-cover" />
 
-        <span className="tracking-wide">
-          {selected.code.toUpperCase()}
-        </span>
+        <span className="tracking-wide">{selected.code.toUpperCase()}</span>
 
-        <span
-          className={`text-xs opacity-60 transition-transform duration-200 ${
-            open ? "rotate-180" : ""
-          }`}
-          aria-hidden="true"
-        >
+        <span className={`text-xs opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} aria-hidden="true">
           ▾
         </span>
       </button>
@@ -180,11 +167,7 @@ const languages = [
           border border-white/10 bg-[#171717]
           p-1.5 shadow-xl shadow-black/20
           transition-all duration-200 origin-top-right
-          ${
-            open
-              ? "visible translate-y-0 scale-100 opacity-100"
-              : "invisible -translate-y-2 scale-95 opacity-0"
-          }`}
+          ${open ? 'visible translate-y-0 scale-100 opacity-100' : 'invisible -translate-y-2 scale-95 opacity-0'}`}
       >
         {languages.map((lang) => (
           <li key={lang.code} role="option" aria-selected={language === lang.code}>
@@ -197,32 +180,15 @@ const languages = [
               className={`flex w-full items-center gap-3
                 rounded-lg px-3 py-2.5 text-sm
                 transition-colors
-                ${
-                  language === lang.code
-                    ? "bg-white/10 text-white"
-                    : "text-white/65 hover:bg-white/5 hover:text-white"
-                }`}
+                ${language === lang.code ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/5 hover:text-white'}`}
             >
-              <img
-                src={lang.flag}
-                alt=""
-                width="18"
-                height="14"
-                loading="lazy"
-                className="h-3.5 w-[18px] rounded-[2px] object-cover"
-              />
+              <img src={lang.flag} alt="" width="18" height="14" loading="lazy" className="h-3.5 w-[18px] rounded-[2px] object-cover" />
 
-              <span className="flex-1 text-left">
-                {lang.name}
-              </span>
+              <span className="flex-1 text-left">{lang.name}</span>
 
-              <span className="text-xs tracking-wider opacity-40">
-                {lang.code.toUpperCase()}
-              </span>
+              <span className="text-xs tracking-wider opacity-40">{lang.code.toUpperCase()}</span>
 
-              {language === lang.code && (
-                <span className="text-xs text-white">✓</span>
-              )}
+              {language === lang.code && <span className="text-xs text-white">✓</span>}
             </button>
           </li>
         ))}
